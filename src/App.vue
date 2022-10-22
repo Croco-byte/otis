@@ -10,6 +10,12 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+
+  mounted: function() {
+    window.electronAPI.onGoToPage((_event, value) => {
+        this.$router.push({name: value});
+    });
   }
 }
 </script>
