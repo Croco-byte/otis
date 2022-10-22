@@ -14,8 +14,7 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
 // Create the browser window.
 const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    show: false,
     webPreferences: {
         // Use pluginOptions.nodeIntegration, leave this alone
         // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -24,22 +23,24 @@ const win = new BrowserWindow({
         preload: path.join(__dirname, '../src/preload.js'),
         }
     })
+    win.maximize();
+    win.show();
 
     // Building the application Menu
     const menu = Menu.buildFromTemplate([
         {
             label: 'Menu',
             submenu: [
-                {label:'HelloWorld',
+                {label:'Accueil',
                 click(){
-                    win.webContents.send('goToPage', 'HelloWorld');
+                    win.webContents.send('goToPage', 'AppHome');
                 }
 
                 },
-                {label:'About',
+                {label:'Tutoriel',
                 
                 click(){
-                    win.webContents.send('goToPage', 'About');
+                    win.webContents.send('goToPage', 'Tutoriel');
                 }},
                 {label:'Exit',
                 click() { 
