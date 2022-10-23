@@ -19,13 +19,21 @@
     </div>
 </template>
 
-<script>
-  import { MDBBtn } from 'mdb-vue-ui-kit';
+<script lang="ts">
+  import { defineComponent } from '@vue/runtime-core';
+import { MDBBtn } from 'mdb-vue-ui-kit';
 
-  export default {
+  export default defineComponent ({
     components: {
         MDBBtn
     },
-  };
+
+    async mounted(): Promise<void> {
+        console.log('Hello people');
+        const result: any = await window.electronAPI.getProjectFromId(1);
+        console.log(result);
+
+    }
+  });
 
 </script>

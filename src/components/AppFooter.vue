@@ -6,7 +6,7 @@
       <MDBRow>
         <!--Grid column-->
         <MDBCol>
-              Made with  <i class="fas fa-robot fa-1,5x pr-5" aria-hidden="true"></i>  by Solène Varescon and Quentin Roland
+              Made with  <i class="fas fa-robot fa-1,5x pr-5" aria-hidden="true"></i>  by Solène & Quentin
         </MDBCol>
         <!--Grid column-->
 

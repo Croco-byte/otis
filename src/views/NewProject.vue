@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from '@vue/runtime-core';
 import { MDBInput, MDBBtn, MDBTextarea } from 'mdb-vue-ui-kit';
 
 interface NewProjectVueData
@@ -26,7 +27,7 @@ interface NewProjectVueData
     submitError: string;
 }
 
-export default {
+export default defineComponent ({
     components: {
         MDBInput,
         MDBBtn,
@@ -41,7 +42,7 @@ export default {
     },
 
     methods: {
-        async saveNewProject() {
+        saveNewProject: async function() {
             // These are just frontend checks for user experience. Security checks are implemented on the main electron process.
             if (!this.projectName) { this.submitError = "Le nom du projet ne peut pas être vide."; return; }
             const re = /^[\u00C0-\u024F\u1E00-\u1EFF\w\d\s-]+$/;
@@ -58,5 +59,5 @@ export default {
         }
     }
 
-};
+});
 </script>

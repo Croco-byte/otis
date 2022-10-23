@@ -88,7 +88,12 @@ async function registerProject(event: any, projectData: ProjectRegistrationData)
     return false;
 }
 
-
+async function getProjectFromId(event: any, id: number) {
+    const db = require('better-sqlite3');
+    const row = db.prepare('SELECT * FROM projects WHERE id = ?').get(id);
+    console.log(row);
+    return row;
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -102,7 +107,10 @@ if (isDevelopment && !process.env.IS_TEST) {
     console.error('Vue Devtools failed to install: ', e.toString())
     }
 }
+
+
 ipcMain.handle('registerProject', registerProject)
+ipcMain.handle('getProjectFromId', getProjectFromId)
 createWindow()
 })
 
