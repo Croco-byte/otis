@@ -18,7 +18,7 @@ export default {
   },
 
   mounted: function() {
-    window.electronAPI.onGoToPage((_event, value) => {
+    window.electronAPI.goToPage((_event, value) => {
         this.$router.push(value);
     });
   }

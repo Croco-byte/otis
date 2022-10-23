@@ -16,8 +16,15 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { MDBInput, MDBBtn, MDBTextarea } from 'mdb-vue-ui-kit';
+
+interface NewProjectVueData
+{
+    projectName: string;
+    projectDescription: string;
+    submitError: string;
+}
 
 export default {
     components: {
@@ -25,7 +32,7 @@ export default {
         MDBBtn,
         MDBTextarea
     },
-    data() {
+    data(): NewProjectVueData {
         return {
             projectName: "",
             projectDescription: "",
@@ -45,7 +52,7 @@ export default {
             // Saving the project
             console.log("Saving new project with name: " + this.projectName);
             console.log("Saving project with description " + this.projectDescription);
-            const result = await window.electronAPI.registerProject({projectName: this.projectName, projectDescription: this.projectDescription});
+            const result: boolean = await window.electronAPI.registerProject({projectName: this.projectName, projectDescription: this.projectDescription});
             if (result) { console.log("Successfully registered project"); }
             else { console.log("Error registering project"); }
         }
