@@ -19,8 +19,7 @@ export default {
 
   mounted: function() {
     window.electronAPI.onGoToPage((_event, value) => {
-        this.$router.push('/home')
-        this.$router.push({name: value});
+        this.$router.push(value);
     });
   }
 }

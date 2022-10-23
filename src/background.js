@@ -1,8 +1,9 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, Menu } from 'electron'
+import { app, protocol, BrowserWindow, Menu, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
+import { ProjectRegistrationData } from './types/projectRegistration.interface.ts'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const path = require('path')
 
@@ -33,14 +34,14 @@ const win = new BrowserWindow({
             submenu: [
                 {label:'Accueil',
                 click(){
-                    win.webContents.send('goToPage', 'AppHome');
+                    win.webContents.send('goToPage', '/');
                 }
 
                 },
                 {label:'Tutoriel',
                 
                 click(){
-                    win.webContents.send('goToPage', 'Tutoriel');
+                    win.webContents.send('goToPage', '/tutoriel');
                 }},
                 {label:'Exit',
                 click() { 
@@ -77,6 +78,16 @@ app.on('activate', () => {
 if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
+
+async function registerProject(_event, projectData) {
+    console.log("Hello, I have been tasked to register a project");
+    console.log("This project has the following name: " + projectData.projectName);
+    console.log("This project has the following description: " + projectData.projectDescription);
+    return true;
+}
+
+
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -89,6 +100,7 @@ if (isDevelopment && !process.env.IS_TEST) {
     console.error('Vue Devtools failed to install:', e.toString())
     }
 }
+ipcMain.handle('registerProject', registerProject)
 createWindow()
 })
 
