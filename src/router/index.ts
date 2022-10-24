@@ -10,6 +10,11 @@ const routes = [
       path: '/new-project',
       name: 'NewProject',
       component: () => import('../views/NewProject.vue')
+  },
+  {
+      path: '/project/:projectId',
+      name: 'Project',
+      component: () => import('../views/AppProject.vue')
   }
 ]
 

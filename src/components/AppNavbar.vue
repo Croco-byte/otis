@@ -10,7 +10,7 @@
         <MDBNavbarItem to="/" active>
           Accueil
         </MDBNavbarItem>
-        <MDBNavbarItem to="/my-projects" active>
+        <MDBNavbarItem to="/project/2" active>
           Mes Projets
         </MDBNavbarItem>
        <router-link to="/new-project"><MDBBtn outline="success" class="me-2">Nouveau Projet </MDBBtn></router-link>

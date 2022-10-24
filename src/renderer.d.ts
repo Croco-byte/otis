@@ -1,9 +1,10 @@
 export interface IElectronAPI {
   goToPage: (callback: any) => Promise<void>,
-  registerProject: (projectData: ProjectRegistrationData) => Promise<boolean>,
+  registerProject: (projectData: ProjectRegistrationData) => ProjectRegistrationResult,
 
   // Database queries
-  getProjectFromId: (id: number) => Promise<any>
+  getProjectFromId: (id: number) => any,
+  getProjectNameFromId: (id: number) => any
 }
 
 declare global {

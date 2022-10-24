@@ -2,15 +2,15 @@ module.exports = {
     // For better-sqlite: https://github.com/WiseLibs/better-sqlite3/issues/488
     configureWebpack: config => {
         config.externals = {
-            'better-sqlite3-with-prebuilds': 'commonjs better-sqlite3-with-prebuilds'
+            'better-sqlite3': 'commonjs better-sqlite3'
         };
     },
   pluginOptions: {
     electronBuilder: {
       preload: 'src/preload.ts',
-      externals: [ 'better-sqlite3-with-prebuilds' ]
+      externals: [ 'better-sqlite3' ]
       // Or, for multiple preload files:
       //preload: { preload: 'src/preload.ts', otherPreload: 'src/preload2.js' }
     }
-  }
+  },
 }

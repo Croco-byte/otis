@@ -1,5 +1,5 @@
 <template>
-  <MDBFooter :text="['center', 'white']" class="fixed-bottom" bg="dark" style="padding-top: 25px;">
+  <MDBFooter :text="['center', 'white']" bg="dark" style="padding-top: 25px;">
     <!-- Grid container -->
     <MDBContainer>
       <!--Grid row-->
