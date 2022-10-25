@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron')
 import { registerProject } from './services/projectRegistration.service'
-import { getProjectFromId, getProjectNameFromId } from './database/dbqueries'
+import { getProjectFromId, getProjectNameFromId, getProjectMetaFromId, getAllProjectsMeta, deleteProjectFromId } from './database/dbqueries'
 
 
 contextBridge.exposeInMainWorld('electronAPI', {
@@ -10,5 +10,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     // https://stackoverflow.com/questions/65851796/how-do-i-make-a-database-call-from-an-electron-front-end
     registerProject: registerProject,
     getProjectFromId: getProjectFromId,
-    getProjectNameFromId: getProjectNameFromId
+    getProjectNameFromId: getProjectNameFromId,
+    getProjectMetaFromId: getProjectMetaFromId,
+    getAllProjectsMeta: getAllProjectsMeta,
+    deleteProjectFromId: deleteProjectFromId
 })

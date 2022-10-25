@@ -1,5 +1,4 @@
 <template>
-<div style="height: 80vh">
     <!-- Header -->
     <div class="p-5 text-center bg-light">
       <h1 class="mb-3">Great Helper Onizuka</h1>
@@ -18,7 +17,6 @@
             <MDBBtn color='danger' style="text-align: centered;" v-on:click="saveNewProject()">Tutoriel</MDBBtn>
         </div>
     </div>
-</div>
 </template>
 
 <script lang="ts">
@@ -44,8 +42,6 @@ import { MDBBtn } from 'mdb-vue-ui-kit';
     },
 
     async mounted(): Promise<void> {
-        const result: any = await window.electronAPI.getProjectFromId(1);
-        console.log(result);
     }
   });
 

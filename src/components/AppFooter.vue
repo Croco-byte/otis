@@ -1,5 +1,5 @@
 <template>
-  <MDBFooter :text="['center', 'white']" bg="dark" style="padding-top: 25px;">
+  <MDBFooter :text="['center', 'white']" class="fixed-bottom" bg="dark" style="padding-top: 5px; margin-bottom: -15px;">
     <!-- Grid container -->
     <MDBContainer>
       <!--Grid row-->
@@ -12,7 +12,7 @@
 
         <!--Grid column-->
         <MDBCol>
-            <MDBBtn outline="light" class="mb-4"> Report a bug  <i class="fas fa-bug fa-1x pr-5" aria-hidden="true"></i></MDBBtn>
+            <MDBBtn outline="light" class="mb-4" tag="a" href="https://github.com/Croco-byte/otis/issues"> Report a bug  <i class="fas fa-bug fa-1x pr-5" aria-hidden="true"></i></MDBBtn>
         </MDBCol>
 
         <MDBCol>

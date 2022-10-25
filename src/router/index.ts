@@ -12,10 +12,15 @@ const routes = [
       component: () => import('../views/NewProject.vue')
   },
   {
+      path: '/my-projects',
+      name: 'MyProjects',
+      component: () => import('../views/MyProjects.vue')
+  },
+  {
       path: '/project/:projectId',
       name: 'Project',
       component: () => import('../views/AppProject.vue')
-  }
+  },
 ]
 
 const router = createRouter({

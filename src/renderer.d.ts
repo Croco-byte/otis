@@ -4,7 +4,10 @@ export interface IElectronAPI {
 
   // Database queries
   getProjectFromId: (id: number) => any,
-  getProjectNameFromId: (id: number) => any
+  getProjectNameFromId: (id: number) => any,
+  getProjectMetaFromId: (id: number) => any,
+  getAllProjectsMeta: () => any,
+  deleteProjectFromId: (id: number) => any,
 }
 
 declare global {

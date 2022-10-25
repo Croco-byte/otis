@@ -6,7 +6,7 @@
     <!-- Header -->
 
     <div class="d-flex">
-        <div class="p-2 w-25" style="border: solid; text-align: left;">
+        <div class="p-2 w-25 border border-danger border-3 rounded" style="text-align: left; margin-right: 5px; margin-left: 5px;">
             <h5 style="text-align: center"><b>Le projet, étape par étape</b></h5>
             <br/>
             <MDBListGroup light>
@@ -79,7 +79,7 @@
                 </MDBListGroupItem>
             </MDBListGroup>
         </div>
-        <div class="p-2 flex-grow-1" style="border: solid;">
+        <div class="p-2 flex-grow-1 border border-danger border-3 rounded">
 
         </div>
 
