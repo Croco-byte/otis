@@ -8,6 +8,10 @@ export interface IElectronAPI {
   getProjectMetaFromId: (id: number) => any,
   getAllProjectsMeta: () => any,
   deleteProjectFromId: (id: number) => any,
+  getProjectStepInfoFromId: (id: number) => any,
+  updateCurrentStep: (id: number, currentStep: string) => any,
+  updateCompletedSteps: (id: number, completedSteps: string) => any,
+  updateCurrentAndCompletedSteps: (id: number, currentStep: string, completedSteps: string) => any,
 }
 
 declare global {

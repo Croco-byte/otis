@@ -1,6 +1,15 @@
 const { contextBridge, ipcRenderer } = require('electron')
 import { registerProject } from './services/projectRegistration.service'
-import { getProjectFromId, getProjectNameFromId, getProjectMetaFromId, getAllProjectsMeta, deleteProjectFromId } from './database/dbqueries'
+import {    getProjectFromId,
+            getProjectNameFromId,
+            getProjectMetaFromId,
+            getAllProjectsMeta,
+            deleteProjectFromId,
+            getProjectStepInfoFromId,
+            updateCurrentStep,
+            updateCompletedSteps,
+            updateCurrentAndCompletedSteps,
+        } from './database/dbqueries'
 
 
 contextBridge.exposeInMainWorld('electronAPI', {
@@ -13,5 +22,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getProjectNameFromId: getProjectNameFromId,
     getProjectMetaFromId: getProjectMetaFromId,
     getAllProjectsMeta: getAllProjectsMeta,
-    deleteProjectFromId: deleteProjectFromId
+    deleteProjectFromId: deleteProjectFromId,
+    getProjectStepInfoFromId: getProjectStepInfoFromId,
+    updateCurrentStep: updateCurrentStep,
+    updateCompletedSteps: updateCompletedSteps,
+    updateCurrentAndCompletedSteps: updateCurrentAndCompletedSteps
 })

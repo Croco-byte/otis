@@ -26,10 +26,52 @@ const getAllProjectsMeta = function() {
     return result
 }
 
+const getProjectStepInfoFromId = function(id: number) {
+    const stmt = db.prepare('SELECT completedSteps, currentStep FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
 const createNewProject = function(projectData: ProjectRegistrationData) {
-    const stmt = db.prepare("INSERT INTO projects (projectName, projectDescription, projectDate) VALUES (?,?, (SELECT strftime('%d/%m/%Y %Hh%M')))");
-    const result = stmt.run(projectData.projectName, projectData.projectDescription);
+    const initSteps = {
+                    'StepStart':            false,
+                    'StepPrelimApproach':   false,
+                    'StepPrelimUnderstand': false,
+                    'StepPrelimBasics':     false,
+                    'StepDraftBasics':      false,
+                    'StepDraftPlan':        false,
+                    'StepDraftAnnounce':    false,
+                    'StepAnalysis':         false,
+                    'StepRedacAdvices':     false,
+                    'StepRedacIntro':       false,
+                    'StepRedacParts':       false,
+                    'StepRedacConclusion':  false,
+                    'StepProofReading':     false,
+                    'StepEnd':              false
+                };
+    const initCurrentStep = "StepStart";
+
+    const stmt = db.prepare("INSERT INTO projects (projectName, projectDescription, projectDate, completedSteps, currentStep) VALUES (?,?,(SELECT strftime('%d/%m/%Y %Hh%M')),?,?)");
+    const result = stmt.run(projectData.projectName, projectData.projectDescription, JSON.stringify(initSteps), initCurrentStep);
     return result.lastInsertRowid
+}
+
+const updateCurrentStep = function(id: number, currentStep: string) {
+    const stmt = db.prepare("UPDATE projects SET currentStep = ? WHERE projectId = ?;");
+    const result = stmt.run(currentStep, id);
+    return result.changes
+}
+
+const updateCompletedSteps = function(id: number, completedSteps: string) {
+    const stmt = db.prepare("UPDATE projects SET completedSteps = ? WHERE projectId = ?;");
+    const result = stmt.run(completedSteps, id);
+    return result.changes
+}
+
+const updateCurrentAndCompletedSteps = function(id: number, currentStep: string, completedSteps: string) {
+    const stmt = db.prepare("UPDATE projects SET currentStep = ?, completedSteps = ? WHERE projectId = ?;");
+    const result = stmt.run(currentStep, completedSteps, id);
+    return result.changes
 }
 
 const deleteProjectFromId = function(id: number) {
@@ -38,4 +80,13 @@ const deleteProjectFromId = function(id: number) {
     return result.changes
 }
 
-export { getProjectFromId, getProjectNameFromId, getProjectMetaFromId, getAllProjectsMeta, createNewProject, deleteProjectFromId }
+export {    getProjectFromId,
+            getProjectNameFromId,
+            getProjectMetaFromId,
+            getAllProjectsMeta,
+            getProjectStepInfoFromId,
+            createNewProject,
+            updateCurrentStep,
+            updateCompletedSteps,
+            updateCurrentAndCompletedSteps,
+            deleteProjectFromId }
