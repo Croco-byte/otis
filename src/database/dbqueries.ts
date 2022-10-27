@@ -1,5 +1,6 @@
 import db from './dbmanager'
 import { ProjectRegistrationData } from '../types/projectRegistration.interface'
+import { BasicInfoData } from '../types/stepsTypes.interface'
 
 
 const getProjectFromId = function(id: number) {
@@ -80,6 +81,12 @@ const deleteProjectFromId = function(id: number) {
     return result.changes
 }
 
+const saveBasicInfo = function(id: number, basicInfo: BasicInfoData) {
+    const stmt = db.prepare("UPDATE projects SET prelimBasics = ? WHERE projectId = ?;");
+    const result = stmt.run(JSON.stringify(basicInfo), id);
+    return result.changes
+}
+
 export {    getProjectFromId,
             getProjectNameFromId,
             getProjectMetaFromId,
@@ -89,4 +96,5 @@ export {    getProjectFromId,
             updateCurrentStep,
             updateCompletedSteps,
             updateCurrentAndCompletedSteps,
-            deleteProjectFromId }
+            deleteProjectFromId,
+            saveBasicInfo }

@@ -9,6 +9,7 @@ import {    getProjectFromId,
             updateCurrentStep,
             updateCompletedSteps,
             updateCurrentAndCompletedSteps,
+            saveBasicInfo
         } from './database/dbqueries'
 
 
@@ -26,5 +27,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getProjectStepInfoFromId: getProjectStepInfoFromId,
     updateCurrentStep: updateCurrentStep,
     updateCompletedSteps: updateCompletedSteps,
-    updateCurrentAndCompletedSteps: updateCurrentAndCompletedSteps
+    updateCurrentAndCompletedSteps: updateCurrentAndCompletedSteps,
+    saveBasicInfo: saveBasicInfo
 })
