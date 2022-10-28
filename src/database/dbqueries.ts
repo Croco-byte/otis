@@ -87,6 +87,12 @@ const saveBasicInfo = function(id: number, basicInfo: BasicInfoData) {
     return result.changes
 }
 
+const getBasicInfo = function(id: number) {
+    const stmt = db.prepare('SELECT prelimBasics FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
 export {    getProjectFromId,
             getProjectNameFromId,
             getProjectMetaFromId,
@@ -97,4 +103,5 @@ export {    getProjectFromId,
             updateCompletedSteps,
             updateCurrentAndCompletedSteps,
             deleteProjectFromId,
-            saveBasicInfo }
+            saveBasicInfo,
+            getBasicInfo }

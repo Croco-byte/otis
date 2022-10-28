@@ -19,7 +19,8 @@
     "mdb-vue-ui-kit": "^3.0.0",
     "ts-loader": "~8.2.0",
     "vue": "^3.2.13",
-    "vue-router": "^4.1.5"
+    "vue-router": "^4.1.5",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

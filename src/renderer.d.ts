@@ -12,7 +12,8 @@ export interface IElectronAPI {
   updateCurrentStep: (id: number, currentStep: string) => any,
   updateCompletedSteps: (id: number, completedSteps: string) => any,
   updateCurrentAndCompletedSteps: (id: number, currentStep: string, completedSteps: string) => any,
-  saveBasicInfo: (id: number, basicInfo: BasicInfoData) => any
+  saveBasicInfo: (id: number, basicInfo: BasicInfoData) => any,
+  getBasicInfo: (id: number) => any,
 }
 
 declare global {

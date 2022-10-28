@@ -49,7 +49,7 @@
                     <MDBListGroup light>
                         <MDBListGroupItem tag="label" class="list-group-item-danger">
                             <input class="form-check-input me-1" disabled type="checkbox" :checked="completedSteps['StepDraftBasics'] ? true : undefined" value="" />
-                            <a href="javascript:void(0)" style="color: #A8213D;" v-on:click="changeCurrentStep('StepDraftBasics')">Les basiques
+                            <a href="javascript:void(0)" style="color: #A8213D;" v-on:click="changeCurrentStep('StepDraftBasics')">Éléments de base
                             <span v-if="currentStep === 'StepDraftBasics'" style="float: right;"><i class="fas fa-edit"></i></span></a>
                         </MDBListGroupItem>
                         <MDBListGroupItem tag="label" class="list-group-item-danger">

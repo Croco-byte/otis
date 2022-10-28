@@ -19,7 +19,7 @@
                 <template #body>Il s'agit ici assez simplement de résumer tout ce que tu comprends. Le thème du texte fait donc référence à ce dont le texte parle, de manière générale, pour toi.</template>
             </MDBPopover>
         </div>
-        <MDBTextarea label="Le thème du texte" rows="4" v-model="theme" wrapperClass="mb-4" />
+        <MDBTextarea rows="4" v-model="theme" wrapperClass="mb-4" />
 
         <div class="d-flex justify-content-between">
         <span>Quel est le genre du texte ?</span>
@@ -31,7 +31,7 @@
                 <template #body>Par exemple s'agit-il de poésie ? De théâtre ? D'un roman ? De littérature d'idée ?</template>
             </MDBPopover>
         </div>
-        <MDBInput type="text" label="Le genre du texte" v-model="genre" wrapperClass="mb-4"/>
+        <MDBInput type="text" v-model="genre" wrapperClass="mb-4"/>
 
         <div class="d-flex justify-content-between">
         <span>Quel est le type du texte ?</span>
@@ -43,7 +43,7 @@
                 <template #body>[demander à Solène]</template>
             </MDBPopover>
         </div>
-        <MDBInput type="text" label="Le type du texte" v-model="type" wrapperClass="mb-4"/>
+        <MDBInput type="text" v-model="type" wrapperClass="mb-4"/>
 
         <div class="d-flex justify-content-between">
         <span>Quel est le but du texte ?</span>
@@ -55,7 +55,7 @@
                 <template #body>[demander à Solène]</template>
             </MDBPopover>
         </div>
-        <MDBInput type="text" label="Le but du texte" v-model="goal" wrapperClass="mb-4"/>
+        <MDBInput type="text" v-model="goal" wrapperClass="mb-4"/>
         
         
         <br/>
@@ -63,7 +63,7 @@
     </div>
 
     <div>
-        <MDBBtn color="danger" v-on:click="saveBasicInfo()">Confirmer ➤</MDBBtn>
+        <MDBBtn color="danger" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
     </div>
 </div>
 </template>
@@ -83,6 +83,7 @@ interface StepPrelimBasicsVueData
 
 export default defineComponent ({
     emits: ['stepCompleted', 'uncompleteStep'],
+    props: ['projectId'],
     components: {
         MDBBtn,
         MDBInput,
@@ -101,7 +102,6 @@ export default defineComponent ({
         popoverGoal
       }
     },
-    props: ['projectId'],
 
     data(): StepPrelimBasicsVueData {
         return {
@@ -114,17 +114,19 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
-
+            const basicInfo = { "theme": this.theme, "genre": this.genre, "type": this.type, "goal": this.goal };
+            window.electronAPI.saveBasicInfo(this.projectId, basicInfo);
             this.$emit('stepCompleted', 'StepPrelimBasics');
         },
-
-        saveBasicInfo: function() {
-            console.log(this.projectId);
-        }
     },
 
     created() {
         this.$emit('uncompleteStep', 'StepPrelimBasics');
+        const basicInfo = JSON.parse(window.electronAPI.getBasicInfo(this.projectId).prelimBasics);
+        this.theme = basicInfo.theme;
+        this.genre = basicInfo.genre;
+        this.type = basicInfo.type;
+        this.goal = basicInfo.goal;
     }
 
 });
