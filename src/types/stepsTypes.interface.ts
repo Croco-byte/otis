@@ -5,3 +5,12 @@ export interface BasicInfoData
     type: string;
     goal: string;
 }
+
+export interface DraftBasicData
+{
+    orderChecked: boolean;
+    author: string;
+    work: string;
+    text: string;
+    issue: string;
+}

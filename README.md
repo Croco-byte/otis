@@ -30,7 +30,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 > Voir ce que je fais du footer (affichage un peu bancal).
 > Voir ce que je fais du bouton "Report a bug".
 > Changer la police pour appliquer les consignes d'affichage adapté aux dyslexiques.
-
+> [IMPORTANT] Ajouter un bouton "Save" sur les étapes pertinentes pour permettre à l'utilisateur de sauvegarder ce qu'il a entré sans forcément compléter l'étape.
 
 
 ### A demander à Solène

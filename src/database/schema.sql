@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS projects (
     currentStep TEXT,
 
     -- Content variables
-    prelimBasics TEXT,
+    prelimBasics TEXT,              -- { "orderCheck": boolean, "author": "", "work": "", "text/extract": "", "issue": "" } 
 
     draftBasics TEXT,
     draftPlan TEXT,

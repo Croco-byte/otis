@@ -38,6 +38,28 @@
         <br/>
         <span>Auteur</span>
         <MDBInput type="text" v-model="author" wrapperClass="mb-4"/>
+        <span>Oeuvre</span>
+        <MDBInput type="text" v-model="work" wrapperClass="mb-4"/>
+        <p>Pour t'aider, voici les informations que tu avais précédemment indiquées relatives au type et au genre du texte :</p>
+        <div class="d-flex justify-content-evenly">
+            <div>
+                <MDBTextarea rows="6" v-model="theme" disabled id="themeHelper" />
+                <div id="themeHelper" class="form-text">
+                    Ce que tu as noté pour le genre du texte.
+                </div>
+            </div>
+            <div>
+                <MDBTextarea rows="6" v-model="genre" disabled id="genreHelper" />
+                <div id="genreHelper" class="form-text">
+                    Ce que tu as noté pour le type du texte.
+                </div>
+            </div>
+        </div>
+        <span>Texte/extrait</span>
+        <MDBInput type="text" v-model="text" wrapperClass="mb-4"/>
+        <span>Problématique</span>
+        <MDBInput type="text" v-model="issue" wrapperClass="mb-4"/>
+
 
     </div>
 
@@ -53,7 +75,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core';
 import draggable from 'vuedraggable'
-import { MDBBtn, MDBInput } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBInput, MDBTextarea } from 'mdb-vue-ui-kit'
 
 /*interface StepDraftBasicsVueData
 {
@@ -66,13 +88,15 @@ export default defineComponent ({
     components: {
         draggable,
         MDBBtn,
-        MDBInput
+        MDBInput,
+        MDBTextarea
     },
     data(): any {
         return {
+
+            // Order minigame data
             dragging: false,
             enabled: true,
-            orderChecked: false,
             orderCheckError: "",
             orderCheckConfirm: "",
             list: [ {name: "Oeuvre"},
@@ -81,16 +105,33 @@ export default defineComponent ({
                     {name: "Auteur"},
                     {name: "Texte/extrait"}
                   ],
+            
+            // Step data
+            orderChecked: false,
+            author: "",
+            work: "",
+            text: "",
+            issue: "",
 
-            author: ""
+            // Helpers data - from StepPrelimBasics
+            theme: "",
+            genre: "",
+            type: "",
+            goal: ""
 
         }
     },
 
     methods: {
         completeStep: function() {
-            console.log(this.list);
-            //this.$emit('stepCompleted', 'StepDraftBasics');
+            const draftBasics = {   "orderChecked": this.orderChecked,
+                                    "author": this.author,
+                                    "work": this.work,
+                                    "text": this.text,
+                                    "issue": this.issue
+                                };
+            window.electronAPI.saveDraftBasics(this.projectId, draftBasics);
+            this.$emit('stepCompleted', 'StepDraftBasics');
         },
 
         checkOrder: function() {
@@ -109,7 +150,24 @@ export default defineComponent ({
     },
 
     created() {
-        // If there is already data in the draftBasics column, don't do the 'order' minigame.
+        const result = JSON.parse(window.electronAPI.getDraftBasics(this.projectId).draftBasics);
+        if (result) {
+            this.orderChecked = result.orderChecked;
+            this.author = result.author;
+            this.work = result.work;
+            this.text = result.text;
+            this.issue = result.issue;
+        }
+
+        // Loading helper data
+        const basicInfo = JSON.parse(window.electronAPI.getBasicInfo(this.projectId).prelimBasics);
+        if (basicInfo) {
+            this.theme = basicInfo.theme;
+            this.genre = basicInfo.genre;
+            this.type = basicInfo.type;
+            this.goal = basicInfo.goal;
+        }
+
         this.$emit('uncompleteStep', 'StepDraftBasics');
     }
 

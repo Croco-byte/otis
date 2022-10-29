@@ -123,10 +123,12 @@ export default defineComponent ({
     created() {
         this.$emit('uncompleteStep', 'StepPrelimBasics');
         const basicInfo = JSON.parse(window.electronAPI.getBasicInfo(this.projectId).prelimBasics);
-        this.theme = basicInfo.theme;
-        this.genre = basicInfo.genre;
-        this.type = basicInfo.type;
-        this.goal = basicInfo.goal;
+        if (basicInfo) {
+            this.theme = basicInfo.theme;
+            this.genre = basicInfo.genre;
+            this.type = basicInfo.type;
+            this.goal = basicInfo.goal;
+        }
     }
 
 });

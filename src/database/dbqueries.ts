@@ -1,6 +1,6 @@
 import db from './dbmanager'
 import { ProjectRegistrationData } from '../types/projectRegistration.interface'
-import { BasicInfoData } from '../types/stepsTypes.interface'
+import { BasicInfoData, DraftBasicData } from '../types/stepsTypes.interface'
 
 
 const getProjectFromId = function(id: number) {
@@ -93,6 +93,18 @@ const getBasicInfo = function(id: number) {
     return result
 }
 
+const saveDraftBasics = function(id: number, draftBasics: DraftBasicData) {
+    const stmt = db.prepare("UPDATE projects SET draftBasics = ? WHERE projectId = ?;");
+    const result = stmt.run(JSON.stringify(draftBasics), id);
+    return result.changes
+}
+
+const getDraftBasics = function(id: number) {
+    const stmt = db.prepare('SELECT draftBasics FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
 export {    getProjectFromId,
             getProjectNameFromId,
             getProjectMetaFromId,
@@ -104,4 +116,6 @@ export {    getProjectFromId,
             updateCurrentAndCompletedSteps,
             deleteProjectFromId,
             saveBasicInfo,
-            getBasicInfo }
+            getBasicInfo,
+            saveDraftBasics,
+            getDraftBasics }
