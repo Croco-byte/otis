@@ -53,9 +53,19 @@
                             <span v-if="currentStep === 'StepDraftBasics'" style="float: right;"><i class="fas fa-edit"></i></span></a>
                         </MDBListGroupItem>
                         <MDBListGroupItem tag="label" class="list-group-item-danger">
-                            <input class="form-check-input me-1" disabled type="checkbox" :checked="completedSteps['StepDraftPlan'] ? true : undefined" value="" />
-                            <a href="javascript:void(0)" style="color: #A8213D;" v-on:click="changeCurrentStep('StepDraftPlan')">Le plan
-                            <span v-if="currentStep === 'StepDraftPlan'" style="float: right;"><i class="fas fa-edit"></i></span></a>
+                            <input class="form-check-input me-1" disabled type="checkbox" :checked="completedSteps['StepDraftPlanEnum'] ? true : undefined" value="" />
+                            <a href="javascript:void(0)" style="color: #A8213D;" v-on:click="changeCurrentStep('StepDraftPlanEnum')">Le plan: repérage
+                            <span v-if="currentStep === 'StepDraftPlanEnum'" style="float: right;"><i class="fas fa-edit"></i></span></a>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem tag="label" class="list-group-item-danger">
+                            <input class="form-check-input me-1" disabled type="checkbox" :checked="completedSteps['StepDraftPlanParts'] ? true : undefined" value="" />
+                            <a href="javascript:void(0)" style="color: #A8213D;" v-on:click="changeCurrentStep('StepDraftPlanParts')">Le plan: les parties
+                            <span v-if="currentStep === 'StepDraftPlanParts'" style="float: right;"><i class="fas fa-edit"></i></span></a>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem tag="label" class="list-group-item-danger">
+                            <input class="form-check-input me-1" disabled type="checkbox" :checked="completedSteps['StepDraftPlanSubparts'] ? true : undefined" value="" />
+                            <a href="javascript:void(0)" style="color: #A8213D;" v-on:click="changeCurrentStep('StepDraftPlanSubparts')">Le plan: les sous-parties
+                            <span v-if="currentStep === 'StepDraftPlanSubparts'" style="float: right;"><i class="fas fa-edit"></i></span></a>
                         </MDBListGroupItem>
                         <MDBListGroupItem tag="label" class="list-group-item-danger">
                             <input class="form-check-input me-1" disabled type="checkbox" :checked="completedSteps['StepDraftAnnounce'] ? true : undefined" value="" />
@@ -121,7 +131,9 @@ import StepPrelimApproach from '../components/steps/StepPrelimApproach.vue';
 import StepPrelimUnderstand from '../components/steps/StepPrelimUnderstand.vue';
 import StepPrelimBasics from '../components/steps/StepPrelimBasics.vue';
 import StepDraftBasics from '../components/steps/StepDraftBasics.vue';
-import StepDraftPlan from '../components/steps/StepDraftPlan.vue';
+import StepDraftPlanEnum from '../components/steps/StepDraftPlanEnum.vue';
+import StepDraftPlanParts from '../components/steps/StepDraftPlanParts.vue';
+import StepDraftPlanSubparts from '../components/steps/StepDraftPlanSubparts.vue';
 import StepDraftAnnounce from '../components/steps/StepDraftAnnounce.vue';
 import StepAnalysis from '../components/steps/StepAnalysis.vue';
 import StepRedacAdvices from '../components/steps/StepRedacAdvices.vue';
@@ -149,7 +161,9 @@ export default defineComponent ({
         StepPrelimUnderstand,
         StepPrelimBasics,
         StepDraftBasics,
-        StepDraftPlan,
+        StepDraftPlanEnum,
+        StepDraftPlanParts,
+        StepDraftPlanSubparts,
         StepDraftAnnounce,
         StepAnalysis,
         StepRedacAdvices,
@@ -220,10 +234,6 @@ export default defineComponent ({
         const stepInfo = window.electronAPI.getProjectStepInfoFromId(this.projectId);
         this.currentStep = stepInfo.currentStep;
         this.completedSteps = JSON.parse(stepInfo.completedSteps);
-        console.log("Here come the step informations");
-        console.log(this.currentStep);
-        console.log(this.completedSteps);
-
     }
 
 });

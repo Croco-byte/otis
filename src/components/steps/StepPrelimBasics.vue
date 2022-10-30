@@ -6,11 +6,12 @@
     </div>
     <!-- Header -->
     <div class="w-75 text-start align-self-center">
-        <br/><h5>Repère et note ci-dessous quelques informations basiques relatives au texte !</h5>
+        <br/>
+        <h5>Repère et note ci-dessous quelques informations basiques relatives au texte !</h5>
         <br/>
 
         <div class="d-flex justify-content-between">
-        <span>De quoi parle le texte ?</span>
+        <span><i class="fas fa-chevron-circle-right"></i> <b>De quoi parle le texte ?</b></span>
             <MDBPopover v-model="popoverTheme" dismissible direction="top">
                 <template #reference>
                     <span class="float-end" v-on:click="popoverTheme = !popoverTheme"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
@@ -22,7 +23,7 @@
         <MDBTextarea rows="4" v-model="theme" wrapperClass="mb-4" />
 
         <div class="d-flex justify-content-between">
-        <span>Quel est le genre du texte ?</span>
+        <span><i class="fas fa-chevron-circle-right"></i> <b>Quel est le genre du texte ?</b></span>
             <MDBPopover v-model="popoverGenre" dismissible direction="top">
                 <template #reference>
                     <span class="float-end" v-on:click="popoverGenre = !popoverGenre"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
@@ -34,7 +35,7 @@
         <MDBInput type="text" v-model="genre" wrapperClass="mb-4"/>
 
         <div class="d-flex justify-content-between">
-        <span>Quel est le type du texte ?</span>
+        <span><i class="fas fa-chevron-circle-right"></i> <b>Quel est le type du texte ?</b></span>
             <MDBPopover v-model="popoverType" dismissible direction="top">
                 <template #reference>
                     <span class="float-end" v-on:click="popoverType = !popoverType"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
@@ -46,7 +47,7 @@
         <MDBInput type="text" v-model="type" wrapperClass="mb-4"/>
 
         <div class="d-flex justify-content-between">
-        <span>Quel est le but du texte ?</span>
+        <span><i class="fas fa-chevron-circle-right"></i> <b>Quel est le but du texte ?</b></span>
             <MDBPopover v-model="popoverGoal" dismissible direction="top">
                 <template #reference>
                     <span class="float-end" v-on:click="popoverGoal = !popoverGoal"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>

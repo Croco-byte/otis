@@ -35,20 +35,22 @@ const getProjectStepInfoFromId = function(id: number) {
 
 const createNewProject = function(projectData: ProjectRegistrationData) {
     const initSteps = {
-                    'StepStart':            false,
-                    'StepPrelimApproach':   false,
-                    'StepPrelimUnderstand': false,
-                    'StepPrelimBasics':     false,
-                    'StepDraftBasics':      false,
-                    'StepDraftPlan':        false,
-                    'StepDraftAnnounce':    false,
-                    'StepAnalysis':         false,
-                    'StepRedacAdvices':     false,
-                    'StepRedacIntro':       false,
-                    'StepRedacParts':       false,
-                    'StepRedacConclusion':  false,
-                    'StepProofReading':     false,
-                    'StepEnd':              false
+                    'StepStart':                false,
+                    'StepPrelimApproach':       false,
+                    'StepPrelimUnderstand':     false,
+                    'StepPrelimBasics':         false,
+                    'StepDraftBasics':          false,
+                    'StepDraftPlanEnum':        false,
+                    'StepDraftPlanParts':       false,
+                    'StepDraftPlanSubparts':    false,
+                    'StepDraftAnnounce':        false,
+                    'StepAnalysis':             false,
+                    'StepRedacAdvices':         false,
+                    'StepRedacIntro':           false,
+                    'StepRedacParts':           false,
+                    'StepRedacConclusion':      false,
+                    'StepProofReading':         false,
+                    'StepEnd':                  false
                 };
     const initCurrentStep = "StepStart";
 

@@ -14,7 +14,9 @@ CREATE TABLE IF NOT EXISTS projects (
             > StepPrelimBasics
 
             > StepDraftBasics
-            > StepDraftPlan
+            > StepDraftPlanEnum
+            > StepDraftPlanParts
+            > StepDraftPlanSubparts
             > StepDraftAnnounce
 
             > StepAnalysis
@@ -36,7 +38,13 @@ CREATE TABLE IF NOT EXISTS projects (
     prelimBasics TEXT,              -- { "orderCheck": boolean, "author": "", "work": "", "text/extract": "", "issue": "" } 
 
     draftBasics TEXT,
-    draftPlan TEXT,
+    draftPlanStructure TEXT,        -- { "parts": number, "partOne_subparts": number, "partTwo_subparts": number, "partThree_subparts": number }
+    draftPlanData TEXT,             /* { "uncategorized": [],
+                                            "part_one": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } },
+                                            "part_two": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } },
+                                            "part_three": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } }
+                                        } */
+    
     draftAnnounce TEXT,
     analysis TEXT
 )

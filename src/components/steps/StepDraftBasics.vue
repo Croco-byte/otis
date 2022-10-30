@@ -36,31 +36,97 @@
         <h6 class="text-success" v-if="orderCheckConfirm">{{ orderCheckConfirm }}</h6>
         <br/><h5>Indique maintenant ci-dessous les différentes informations de base dont tu auras besoin pour ton introduction :</h5>
         <br/>
-        <span>Auteur</span>
-        <MDBInput type="text" v-model="author" wrapperClass="mb-4"/>
-        <span>Oeuvre</span>
-        <MDBInput type="text" v-model="work" wrapperClass="mb-4"/>
+
+        <div class="d-flex justify-content-between">
+        <span><i class="fas fa-chevron-circle-right"></i> <b>Auteur</b></span>
+            <MDBPopover v-model="popoverAuthor" dismissible direction="top">
+                <template #reference>
+                    <span class="float-end" v-on:click="popoverAuthor = !popoverAuthor"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                </template>
+                <template #header>L'auteur du texte</template>
+                <template #body>Indique ici des informations relatives à l'auteur. Tu peux par exemple commencer par son nom, éventuellement le mouvement littéraire auquel il appartient, et toute information pertinente relative à l'auteur.</template>
+            </MDBPopover>
+        </div>
+        <MDBTextarea rows="2" v-model="author" wrapperClass="mb-4"/>
+        
+        
+        <div class="border p-2 mb-2 mt-2">
+        <div class="d-flex justify-content-between">
+        <span><i class="fas fa-chevron-circle-right"></i> <b>Oeuvre</b></span>
+            <MDBPopover v-model="popoverWork" dismissible direction="top">
+                <template #reference>
+                    <span class="float-end" v-on:click="popoverWork = !popoverWork"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                </template>
+                <template #header>L'oeuvre de laquelle est tirée le texte</template>
+                <template #body>Indique ici des informations relatives à l'oeuvre de laquelle est tirée le texte. Typiquement le titre du livre, la date de publication, et toute autre information utile relative à l'oeuvre.</template>
+            </MDBPopover>
+        </div>
+        <MDBTextarea v-model="work" wrapperClass="mb-4"/>
         <p>Pour t'aider, voici les informations que tu avais précédemment indiquées relatives au type et au genre du texte :</p>
         <div class="d-flex justify-content-evenly">
             <div>
-                <MDBTextarea rows="6" v-model="theme" disabled id="themeHelper" />
+                <MDBTextarea rows="6" v-model="genre" disabled id="themeHelper" />
                 <div id="themeHelper" class="form-text">
                     Ce que tu as noté pour le genre du texte.
                 </div>
             </div>
             <div>
-                <MDBTextarea rows="6" v-model="genre" disabled id="genreHelper" />
+                <MDBTextarea rows="6" v-model="type" disabled id="genreHelper" />
                 <div id="genreHelper" class="form-text">
                     Ce que tu as noté pour le type du texte.
                 </div>
             </div>
         </div>
-        <span>Texte/extrait</span>
-        <MDBInput type="text" v-model="text" wrapperClass="mb-4"/>
-        <span>Problématique</span>
-        <MDBInput type="text" v-model="issue" wrapperClass="mb-4"/>
+        </div>
+
+        <br/>
+        <div class="border p-2 mb-2 mt-2">
+        <div class="d-flex justify-content-between">
+        <span><i class="fas fa-chevron-circle-right"></i> <b>Texte/extrait</b></span>
+            <MDBPopover v-model="popoverText" dismissible direction="top">
+                <template #reference>
+                    <span class="float-end" v-on:click="popoverText = !popoverText"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                </template>
+                <template #header>Le texte lui-même</template>
+                <template #body>Indique ici des informations relatives au texte lui-même. Tu peux par exemple reprendre le thème du texte, résumer le texte, lister les registres lexicaux utilisés, et toute autre information utile qui se rappore au texte.</template>
+            </MDBPopover>
+        </div>
+        <MDBTextarea v-model="text" wrapperClass="mb-4"/>
+        <p>Pour t'aider, voici les informations que tu avais précédemment indiquées relatives au thème du texte :</p>
+        <div class="d-flex justify-content-evenly">
+            <div>
+                <MDBTextarea rows="6" v-model="theme" disabled id="themeHelper" />
+                <div id="themeHelper" class="form-text">
+                    Ce que tu as noté pour le thème du texte.
+                </div>
+            </div>
+        </div>
+        </div>
 
 
+        <br/>
+        <div class="border p-2 mb-2 mt-2">
+        <div class="d-flex justify-content-between">
+        <span><i class="fas fa-chevron-circle-right"></i> <b>Problématique</b></span>
+            <MDBPopover v-model="popoverIssue" dismissible direction="top">
+                <template #reference>
+                    <span class="float-end" v-on:click="popoverIssue = !popoverIssue"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                </template>
+                <template #header>La problématique</template>
+                <template #body>En t'appuyant sur les différents éléments renseignés précédemment, rédige ici une première problématique. Celle-ci pourrait par exemple avoir le format : "Comment [nom de l'auteur] [but du texte] ?".</template>
+            </MDBPopover>
+        </div>
+        <MDBTextarea rows="2" v-model="issue" wrapperClass="mb-4"/>
+        <p>Pour t'aider, voici les informations que tu avais précédemment indiquées relatives au but du texte :</p>
+        <div class="d-flex justify-content-evenly">
+            <div>
+                <MDBTextarea rows="6" v-model="goal" disabled id="goalHelper" />
+                <div id="goalHelper" class="form-text">
+                    Ce que tu as noté pour le but du texte.
+                </div>
+            </div>
+        </div>
+        </div>
     </div>
 
 
@@ -73,9 +139,10 @@
 </template>
 
 <script lang="ts">
+import { ref } from 'vue'
 import { defineComponent } from '@vue/runtime-core';
 import draggable from 'vuedraggable'
-import { MDBBtn, MDBInput, MDBTextarea } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBTextarea, MDBPopover } from 'mdb-vue-ui-kit'
 
 /*interface StepDraftBasicsVueData
 {
@@ -88,9 +155,22 @@ export default defineComponent ({
     components: {
         draggable,
         MDBBtn,
-        MDBInput,
-        MDBTextarea
+        MDBTextarea,
+        MDBPopover
     },
+    setup() {
+      const popoverAuthor = ref(false);
+      const popoverWork = ref(false);
+      const popoverText = ref(false);
+      const popoverIssue = ref(false);
+      return {
+        popoverAuthor,
+        popoverWork,
+        popoverText,
+        popoverIssue
+      }
+    },
+
     data(): any {
         return {
 
