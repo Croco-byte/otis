@@ -38,13 +38,19 @@ CREATE TABLE IF NOT EXISTS projects (
     prelimBasics TEXT,              -- { "orderCheck": boolean, "author": "", "work": "", "text/extract": "", "issue": "" } 
 
     draftBasics TEXT,
-    draftPlanStructure TEXT,        -- { "parts": number, "partOne_subparts": number, "partTwo_subparts": number, "partThree_subparts": number }
-    draftPlanData TEXT,             /* { "uncategorized": [],
-                                            "part_one": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } },
-                                            "part_two": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } },
-                                            "part_three": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } }
-                                        } */
+    draftPlanStructure TEXT,        /* { "parts": number, "part_one": { "title": string, "subparts": number },
+                                                          "part_two": { "title": string, "subparts": number },
+                                                          "part_three": { "title": string, "subparts": number } */
+    draftPlanElements TEXT,         -- { "elements": [ {"data": string, "category": string}, ... ] }
     
     draftAnnounce TEXT,
     analysis TEXT
 )
+
+
+
+ /*draftPlanData TEXT,              { "uncategorized": [],
+                                            "part_one": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } },
+                                            "part_two": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } },
+                                            "part_three": { "title": string, "elements": { "uncategorized": [], "s1": [], "s2": [], "s3": [] } }
+                                        } */

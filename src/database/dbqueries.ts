@@ -1,6 +1,6 @@
 import db from './dbmanager'
 import { ProjectRegistrationData } from '../types/projectRegistration.interface'
-import { BasicInfoData, DraftBasicData } from '../types/stepsTypes.interface'
+import { BasicInfoData, DraftBasicData, DraftPlanElementsData, DraftPlanData } from '../types/stepsTypes.interface'
 
 
 const getProjectFromId = function(id: number) {
@@ -34,6 +34,8 @@ const getProjectStepInfoFromId = function(id: number) {
 }
 
 const createNewProject = function(projectData: ProjectRegistrationData) {
+
+    // Initializing Step data
     const initSteps = {
                     'StepStart':                false,
                     'StepPrelimApproach':       false,
@@ -107,6 +109,34 @@ const getDraftBasics = function(id: number) {
     return result
 }
 
+// To delete
+const saveDraftPlanData = function(id: number, draftPlanData: DraftPlanData) {
+    const stmt = db.prepare("UPDATE projects SET draftPlanData = ? WHERE projectId = ?;");
+    const result = stmt.run(JSON.stringify(draftPlanData), id);
+    return result.changes
+}
+
+// To delete
+const getDraftPlanData = function(id: number) {
+    const stmt = db.prepare('SELECT draftPlanData FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
+const saveDraftPlanElements = function(id: number, draftPlanElements: DraftPlanElementsData) {
+    const stmt = db.prepare("UPDATE projects SET draftPlanElements = ? WHERE projectId = ?;");
+    const result = stmt.run(JSON.stringify(draftPlanElements), id);
+    return result.changes
+}
+
+const getDraftPlanElements = function(id: number) {
+    const stmt = db.prepare('SELECT draftPlanElements FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
+
+
 export {    getProjectFromId,
             getProjectNameFromId,
             getProjectMetaFromId,
@@ -120,4 +150,8 @@ export {    getProjectFromId,
             saveBasicInfo,
             getBasicInfo,
             saveDraftBasics,
-            getDraftBasics }
+            getDraftBasics,
+            saveDraftPlanData,
+            getDraftPlanData,
+            saveDraftPlanElements,
+            getDraftPlanElements }
