@@ -135,6 +135,17 @@ const getDraftPlanElements = function(id: number) {
     return result
 }
 
+const saveDraftPlanStructure = function(id: number, draftPlanStructure: any) {
+    const stmt = db.prepare("UPDATE projects SET draftPlanStructure = ? WHERE projectId = ?;");
+    const result = stmt.run(JSON.stringify(draftPlanStructure), id);
+    return result.changes
+}
+
+const getDraftPlanStructure = function(id: number) {
+    const stmt = db.prepare('SELECT draftPlanStructure FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
 
 
 export {    getProjectFromId,
@@ -154,4 +165,6 @@ export {    getProjectFromId,
             saveDraftPlanData,
             getDraftPlanData,
             saveDraftPlanElements,
-            getDraftPlanElements }
+            getDraftPlanElements,
+            saveDraftPlanStructure,
+            getDraftPlanStructure }

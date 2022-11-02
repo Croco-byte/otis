@@ -16,7 +16,9 @@ import {    getProjectFromId,
             saveDraftPlanData,
             getDraftPlanData,
             saveDraftPlanElements,
-            getDraftPlanElements
+            getDraftPlanElements,
+            saveDraftPlanStructure,
+            getDraftPlanStructure
         } from './database/dbqueries'
 
 
@@ -42,5 +44,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getDraftPlanData: getDraftPlanData,
     saveDraftPlanData: saveDraftPlanData,
     getDraftPlanElements: getDraftPlanElements,
-    saveDraftPlanElements: saveDraftPlanElements
+    saveDraftPlanElements: saveDraftPlanElements,
+    getDraftPlanStructure: getDraftPlanStructure,
+    saveDraftPlanStructure: saveDraftPlanStructure
 })
