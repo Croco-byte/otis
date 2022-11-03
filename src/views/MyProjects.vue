@@ -65,8 +65,7 @@ export default defineComponent ({
     methods: {
         deleteProject: async function(projectId: number) {
             if (confirm("Es-tu sûr que tu souhaites supprimer ce projet ?")) {
-                const result: any = await window.electronAPI.deleteProjectFromId(projectId);
-                console.log(result);
+                await window.electronAPI.deleteProjectFromId(projectId);
 
                 // Reload projects after deletion
                 this.allProjects = await window.electronAPI.getAllProjectsMeta();

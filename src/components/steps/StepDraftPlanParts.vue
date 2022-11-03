@@ -11,13 +11,6 @@
               <MDBRadio label="Trois parties" id="3" v-model="partsNumber" value="3" />
         </div>
         <br/>
-        <h5>Donne un nom à tes parties.</h5>
-        <div class="w-50">
-             <MDBInput type="text" v-model="partOneTitle" wrapperClass="mb-4"/>
-             <MDBInput type="text" v-model="partTwoTitle" wrapperClass="mb-4"/>
-             <MDBInput type="text" v-if="partsNumber === '3'" v-model="partThreeTitle" wrapperClass="mb-4"/>
-        </div>
-        <br/>
         <br/>
         <h5>Tu peux maintenant, ci-dessous, organiser les éléments que tu avais repéré à l'étape précédente dans tes parties, auxquelles tu peux donner un titre. Utilise la souris pour déplacer les éléments dans les différentes colonnes.</h5>
         <br/>
@@ -29,9 +22,11 @@
                 class="d-flex"
                 group="parts"
                 :list="uncategorized"
+                item-key="1"
                 >
                 <template #item="{ element }">
-                <div class="m-1 p-1 border border-danger rounded">{{ element }}</div>
+                <div class="m-1 p-1 border border-danger rounded" v-if="element.length >= 40">{{ element.substr(0, 37) }}...</div>
+                <div class="m-1 p-1 border border-danger rounded" v-else>{{ element }}</div>
                 </template>
                 </draggable>
                 </div>
@@ -41,28 +36,31 @@
         <h4> Parties </h4>
         <div class="text-center d-flex justify-content-around">
             <div class="border border-2 border-dark" style="min-width: 200px; min-height: 200px;">
-                <h6 class="border-bottom border-2 border-dark">{{ partOneTitle }}</h6>
-                <draggable class="list-group" group="parts" :list="partOne">
+                <h6 class="border-bottom border-2 border-dark"><MDBInput type="text" v-model="partOneTitle" /></h6>
+                <draggable class="list-group" group="parts" :list="partOne" item-key="1">
                     <template #item="{ element }">
-                    <div class="list-group-item border border-danger m-1">{{ element }}</div>
+                    <div class="list-group-item border border-danger m-1" v-if="element.length >= 40">{{ element.substr(0, 37) }}...</div>
+                    <div class="list-group-item border border-danger m-1" v-else>{{ element }}</div>
                     </template>
                 </draggable>
             </div>
 
             <div class="border border-2 border-dark" style="min-width: 200px; min-height: 200px;">
-                <h6  class="border-bottom border-2 border-dark">{{ partTwoTitle }}</h6>
-                <draggable class="list-group" :list="partTwo" group="parts" >
+                <h6  class="border-bottom border-2 border-dark"><MDBInput type="text" v-model="partTwoTitle" /></h6>
+                <draggable class="list-group" :list="partTwo" group="parts" item-key="1">
                     <template #item="{ element }">
-                    <div class="list-group-item border border-danger m-1">{{ element}}</div>
+                    <div class="list-group-item border border-danger m-1" v-if="element.length >= 40">{{ element.substr(0, 37) }}...</div>
+                    <div class="list-group-item border border-danger m-1" v-else>{{ element }}</div>
                     </template>
                 </draggable>
             </div>
 
             <div class="border border-2 border-dark" style="min-width: 200px; min-height: 200px;" v-if="partsNumber === '3'">
-                <h6  class="border-bottom border-2 border-dark">{{ partThreeTitle }}</h6>
-                <draggable class="list-group" :list="partThree" group="parts">
+                <h6  class="border-bottom border-2 border-dark"><MDBInput type="text" v-model="partThreeTitle" /></h6>
+                <draggable class="list-group" :list="partThree" group="parts" item-key="1">
                     <template #item="{ element }">
-                    <div class="list-group-item border border-danger m-1">{{ element }}</div>
+                    <div class="list-group-item border border-danger m-1" v-if="element.length >= 40">{{ element.substr(0, 37) }}...</div>
+                    <div class="list-group-item border border-danger m-1" v-else>{{ element }}</div>
                     </template>
                 </draggable>
             </div>
@@ -136,6 +134,15 @@ export default defineComponent ({
             window.electronAPI.saveDraftPlanStructure(this.projectId, JSON.parse(JSON.stringify(this.structure)));
 
             this.$emit('stepCompleted', 'StepDraftPlanParts');
+        },
+    },
+
+    watch: {
+        partsNumber(newNumber, oldNumber) {
+            if (oldNumber == 3 && newNumber == 2) {
+                this.uncategorized.push.apply(this.uncategorized, this.partThree);
+                this.partThree = [];
+            }
         }
     },
 
