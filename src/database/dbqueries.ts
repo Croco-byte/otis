@@ -147,6 +147,29 @@ const getDraftPlanStructure = function(id: number) {
     return result
 }
 
+const saveDraftAnnounce = function(id: number, draftAnnounce: string) {
+    const stmt = db.prepare("UPDATE projects SET draftAnnounce = ? WHERE projectId = ?;");
+    const result = stmt.run(draftAnnounce, id);
+    return result.changes
+}
+
+const getDraftAnnounce = function(id: number) {
+    const stmt = db.prepare('SELECT draftAnnounce FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
+const saveAnalysis = function(id: number, analysis: any) {
+    const stmt = db.prepare("UPDATE projects SET analysis = ? WHERE projectId = ?;");
+    const result = stmt.run(JSON.stringify(analysis), id);
+    return result.changes
+}
+
+const getAnalysis = function(id: number) {
+    const stmt = db.prepare('SELECT analysis FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
 
 export {    getProjectFromId,
             getProjectNameFromId,
@@ -167,4 +190,8 @@ export {    getProjectFromId,
             saveDraftPlanElements,
             getDraftPlanElements,
             saveDraftPlanStructure,
-            getDraftPlanStructure }
+            getDraftPlanStructure,
+            saveDraftAnnounce,
+            getDraftAnnounce,
+            saveAnalysis,
+            getAnalysis }

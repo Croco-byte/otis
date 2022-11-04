@@ -21,7 +21,11 @@ export interface IElectronAPI {
   saveDraftPlanElements: (id: number, draftPlanElements: DraftPlanElementsData) => any,
   getDraftPlanElements: (id: number) => any,
   saveDraftPlanStructure: (id: number, draftPlanStructure: any) => any,
-  getDraftPlanStructure: (id: number) => any
+  getDraftPlanStructure: (id: number) => any,
+  saveDraftAnnounce: (id: number, draftAnnounce: string) => any,
+  getDraftAnnounce: (id: number) => any,
+  saveAnalysis: (id: number, analysis: any) => any,
+  getAnalysis: (id: number) => any
 }
 
 declare global {
