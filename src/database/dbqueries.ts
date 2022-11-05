@@ -171,6 +171,43 @@ const getAnalysis = function(id: number) {
     return result
 }
 
+const saveIntroRedacted = function(id: number, introRedacted: string) {
+    const stmt = db.prepare("UPDATE projects SET introRedacted = ? WHERE projectId = ?;");
+    const result = stmt.run(introRedacted, id);
+    return result.changes
+}
+
+const getIntroRedacted = function(id: number) {
+    const stmt = db.prepare('SELECT introRedacted FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
+const saveRedacParts = function(id: number, toSave: any) {
+    const stmt = db.prepare("UPDATE projects SET p1Announce = ?, p1s1Redacted = ?, p1s2Redacted = ?, p1s3Redacted = ?, p1Transition = ?, p2Announce = ?, p2s1Redacted = ?, p2s2Redacted = ?, p2s3Redacted = ?, p2Transition = ?, p3Announce = ?, p3s1Redacted = ?, p3s2Redacted = ?, p3s3Redacted = ? WHERE projectId = ?;");
+    const result = stmt.run(toSave[0], toSave[1], toSave[2], toSave[3], toSave[4], toSave[5], toSave[6], toSave[7], toSave[8], toSave[9], toSave[10], toSave[11], toSave[12], toSave[13], id);
+    return result.changes
+}
+
+const getRedacParts = function(id: number) {
+    const stmt = db.prepare('SELECT p1Announce, p1s1Redacted, p1s2Redacted, p1s3Redacted, p1Transition, p2Announce, p2s1Redacted, p2s2Redacted, p2s3Redacted, p2Transition, p3Announce, p3s1Redacted, p3s2Redacted, p3s3Redacted FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
+const saveConclusionRedacted = function(id: number, conclusionRedacted: any) {
+    const stmt = db.prepare("UPDATE projects SET conclusionRedacted = ? WHERE projectId = ?;");
+    const result = stmt.run(JSON.stringify(conclusionRedacted), id);
+    return result.changes
+}
+
+const getConclusionRedacted = function(id: number) {
+    const stmt = db.prepare('SELECT conclusionRedacted FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
+
 export {    getProjectFromId,
             getProjectNameFromId,
             getProjectMetaFromId,
@@ -194,4 +231,10 @@ export {    getProjectFromId,
             saveDraftAnnounce,
             getDraftAnnounce,
             saveAnalysis,
-            getAnalysis }
+            getAnalysis,
+            saveIntroRedacted,
+            getIntroRedacted,
+            saveRedacParts,
+            getRedacParts,
+            saveConclusionRedacted,
+            getConclusionRedacted }

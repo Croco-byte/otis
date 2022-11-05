@@ -36,3 +36,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### A demander à Solène
 > Pour l'étape "Comprendre le texte", je n'ai pas très bien compris ce que signifie "ajouter des trucs sur lesquels on passe la souris pour avoir des aides sur le vocabulaire".
 > Popover 'type du texte'.
+
+
+ ### Déploiement en prod
+ https://stackoverflow.com/questions/48587035/electron-how-to-set-a-custom-directory-for-user-data-user-data-dir

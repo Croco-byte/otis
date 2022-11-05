@@ -9,7 +9,7 @@
         <h5>Il est maintenant temps d'élaborer ton plan. Pour cela, commençons par faire un peu de repérage.</h5>
         <br/>
         <span><i class="fas fa-chevron-circle-right"></i> Liste ci-dessous, en vrac, tout ce qui te paraît important dans le texte (thèmes, registre, énonciation, etc.), sous la forme d'un mot ou d'une courte phrase qui représente l'élément. Essaie d'avoir une liste d'environ <b>6-10 éléments</b>. Tu peux avoir besoin de relire le texte plusieurs fois.
-        <br/> Appuie sur le bouton <i class="fa fa-plus-circle"></i> pour ajouter des éléments, et sur le bouton <i class="fa fa-minus-circle"></i> pour en supprimer.</span>
+        <br/><br/> Appuie sur le bouton <i class="fa fa-plus-circle"></i> pour ajouter des éléments, et sur le bouton <i class="fa fa-minus-circle"></i> pour en supprimer.</span>
         <br/>
         <br/>
         <div class="d-flex align-items-center" v-for="(element, index) in elements" :key="`${index}`">

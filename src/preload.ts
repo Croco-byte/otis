@@ -22,7 +22,13 @@ import {    getProjectFromId,
             saveDraftAnnounce,
             getDraftAnnounce,
             saveAnalysis,
-            getAnalysis
+            getAnalysis,
+            saveIntroRedacted,
+            getIntroRedacted,
+            saveRedacParts,
+            getRedacParts,
+            saveConclusionRedacted,
+            getConclusionRedacted
         } from './database/dbqueries'
 
 
@@ -54,5 +60,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getDraftAnnounce: getDraftAnnounce,
     saveDraftAnnounce: saveDraftAnnounce,
     getAnalysis: getAnalysis,
-    saveAnalysis: saveAnalysis
+    saveAnalysis: saveAnalysis,
+    getIntroRedacted,
+    saveIntroRedacted,
+    getRedacParts,
+    saveRedacParts,
+    getConclusionRedacted,
+    saveConclusionRedacted
 })

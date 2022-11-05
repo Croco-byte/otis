@@ -44,5 +44,22 @@ CREATE TABLE IF NOT EXISTS projects (
     draftPlanElements TEXT,         -- { "elements": [ {"data": string, "category": string}, ... ] }
     
     draftAnnounce TEXT,
-    analysis TEXT
+    analysis TEXT,
+
+    introRedacted TEXT,
+    p1Announce TEXT,
+    p1s1Redacted TEXT,
+    p1s2Redacted TEXT,
+    p1s3Redacted TEXT,
+    p1Transition TEXT,
+    p2Announce TEXT,
+    p2s1Redacted TEXT,
+    p2s2Redacted TEXT,
+    p2s3Redacted TEXT,
+    p2Transition TEXT,
+    p3Announce TEXT,
+    p3s1Redacted TEXT,
+    p3s2Redacted TEXT,
+    p3s3Redacted TEXT,
+    conclusionRedacted TEXT         -- { "summary": string, "issueAnswer": string, "opening": string }
 )
