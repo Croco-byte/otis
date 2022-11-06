@@ -1,7 +1,9 @@
-import db from './dbmanager'
+import { initializeDatabase } from './dbmanager'
 import { ProjectRegistrationData } from '../types/projectRegistration.interface'
 import { BasicInfoData, DraftBasicData, DraftPlanElementsData, DraftPlanData } from '../types/stepsTypes.interface'
 
+let db: any;
+initializeDatabase().then((result) => db = result);
 
 const getProjectFromId = function(id: number) {
     const stmt = db.prepare('SELECT * FROM projects WHERE projectId = ?;')

@@ -26,6 +26,10 @@ const win = new BrowserWindow({
         preload: path.join(__dirname, 'preload.js'),
         }
     })
+
+    ipcMain.handle('getUserDataDirectory', async (event) => {
+        return app.getPath("userData")
+    })
     win.maximize();
     win.show();
 
@@ -82,9 +86,6 @@ if (BrowserWindow.getAllWindows().length === 0) createWindow()
 
 
 async function registerProject(event: any, projectData: ProjectRegistrationData): Promise<boolean> {
-    console.log("Hello, I have been tasked to register a project");
-    console.log("This project has the following name: " + projectData.projectName);
-    console.log("This project has the following description: " + projectData.projectDescription);
     return false;
 }
 

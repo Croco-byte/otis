@@ -40,3 +40,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
  ### Déploiement en prod
  https://stackoverflow.com/questions/48587035/electron-how-to-set-a-custom-directory-for-user-data-user-data-dir
+ https://www.electron.build/multi-platform-build#linux
