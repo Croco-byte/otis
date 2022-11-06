@@ -61,5 +61,6 @@ CREATE TABLE IF NOT EXISTS projects (
     p3s1Redacted TEXT,
     p3s2Redacted TEXT,
     p3s3Redacted TEXT,
-    conclusionRedacted TEXT         -- { "summary": string, "issueAnswer": string, "opening": string }
+    conclusionRedacted TEXT,         -- { "summary": string, "issueAnswer": string, "opening": string }
+    everythingRedacted TEXT
 )

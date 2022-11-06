@@ -207,6 +207,89 @@ const getConclusionRedacted = function(id: number) {
     return result
 }
 
+const getEverythingRedacted = function(id: number) {
+    const stmt = db.prepare('SELECT everythingRedacted FROM projects WHERE projectId = ?;')
+    const result = stmt.get(id);
+    return result
+}
+
+const saveEverythingRedacted = function(id: number, everythingRedacted: string) {
+    const stmt = db.prepare("UPDATE projects SET everythingRedacted = ? WHERE projectId = ?;");
+    const result = stmt.run(everythingRedacted, id);
+    return result.changes
+}
+
+const buildFinalRedaction = function(id: number) {
+    let redacted = "";
+    let draftPlanStructure: any = {};
+    let conclusion: any = {};
+
+    const stmt = db.prepare('SELECT projectName, projectDate, draftPlanStructure, introRedacted, p1Announce, p1s1Redacted, p1s2Redacted, p1s3Redacted, p1Transition, p2Announce, p2s1Redacted, p2s2Redacted, p2s3Redacted, p2Transition, p3Announce, p3s1Redacted, p3s2Redacted, p3s3Redacted, conclusionRedacted FROM projects WHERE projectId = ?;');
+    const result = stmt.get(id);
+
+    if (result.draftPlanStructure) {
+            draftPlanStructure = JSON.parse(result.draftPlanStructure);
+        } else {
+            draftPlanStructure = { "parts": '2', "partOne": { "title": "Première partie", "subparts": '2', "subpartOneTitle": "Sous-partie 1", "subpartTwoTitle": "Sous-partie 2", "subpartThreeTitle": "Sous-partie 3" },
+                                           "partTwo": { "title": "Deuxième partie", "subparts": '2', "subpartOneTitle": "Sous-partie 1", "subpartTwoTitle": "Sous-partie 2", "subpartThreeTitle": "Sous-partie 3" },
+                                           "partThree": { "title": "Troisième partie", "subparts": '2', "subpartOneTitle": "Sous-partie 1", "subpartTwoTitle": "Sous-partie 2", "subpartThreeTitle": "Sous-partie 3" }}
+        }
+
+    if (result.conclusionRedacted) {
+            conclusion = JSON.parse(result.conclusionRedacted);
+        } else {
+            conclusion = { "summary": "", "issueAnswer": "", "opening": ""};
+        }
+
+    redacted += '<h1 style="text-align: center;">' + result.projectName + "</h1>";
+    redacted += '<h3 style="text-align: center;">' + result.projectDate + "</h3></div>";
+    redacted += "<br/><br/>";
+    redacted += "     " + result.introRedacted + "<br/><br/>";
+    redacted += "<h3>   <b><u>I. " + draftPlanStructure.partOne.title + "</b></u></h3>";
+    redacted += "<p>" + result.p1Announce + "</p><br/>";
+    redacted += "<h4><i>    1. " + draftPlanStructure.partOne.subpartOneTitle + "</i></h4>";
+    redacted += "<p>" + result.p1s1Redacted + "</p><br/>";
+    redacted += "<h4><i>    2. " + draftPlanStructure.partOne.subpartTwoTitle + "</i></h4>";
+    redacted += "<p>" + result.p1s2Redacted + "</p><br/>";
+
+    if (draftPlanStructure.partOne.subparts === '3') {
+        redacted += "<h4><i>    3. " + draftPlanStructure.partOne.subpartThreeTitle + "</i></h4>";
+        redacted += "<p>" + result.p1s3Redacted + "</p><br/>";
+    }
+
+    redacted += "<br/><p>" + result.p1Transition + "</p><br/>";
+    redacted += "<h3>   <b><u>II. " + draftPlanStructure.partTwo.title + "</b></u></h3>";
+    redacted += "<p>" + result.p2Announce + "</p><br/>";
+    redacted += "<h4><i>    1. " + draftPlanStructure.partTwo.subpartOneTitle + "</i></h4>";
+    redacted += "<p>" + result.p2s1Redacted + "</p><br/>";
+    redacted += "<h4><i>    2. " + draftPlanStructure.partTwo.subpartTwoTitle + "</i></h4>";
+    redacted += "<p>" + result.p2s2Redacted + "</p><br/>";
+
+    if (draftPlanStructure.partTwo.subparts === '3') {
+        redacted += "<h4><i>    3. " + draftPlanStructure.partTwo.subpartThreeTitle + "</i></h4>";
+        redacted += "<p>" + result.p2s3Redacted + "</p><br/>";
+    }
+
+    if (draftPlanStructure.parts === '3') {
+        redacted += "<br/><p>" + result.p2Transition + "</p><br/>";
+        redacted += "<h3>   <b><u>III. " + draftPlanStructure.partThree.title + "</u></b></h3>";
+        redacted += "<p>" + result.p3Announce + "</p><br/>";
+        redacted += "<h4><i>    1. " + draftPlanStructure.partThree.subpartOneTitle + "</i></h4>";
+        redacted += "<p>" + result.p3s1Redacted + "</p><br/>";
+        redacted += "<h4><i>    2. " + draftPlanStructure.partThree.subpartTwoTitle + "</i></h4>";
+        redacted += "<p>" + result.p3s2Redacted + "</p><br/>";
+
+        if (draftPlanStructure.partThree.subparts === '3') {
+            redacted += "<h4><i>    3. " + draftPlanStructure.partThree.subpartThreeTitle + "</i></h4>";
+            redacted += "<p>" + result.p3s3Redacted + "</p><br/>";
+        }
+    }
+
+    redacted += "<br/><p>   " + conclusion.summary + "\n" + conclusion.issueAnswer + "\n" + conclusion.opening + "</p>";
+
+    return redacted;
+}
+
 
 export {    getProjectFromId,
             getProjectNameFromId,
@@ -237,4 +320,7 @@ export {    getProjectFromId,
             saveRedacParts,
             getRedacParts,
             saveConclusionRedacted,
-            getConclusionRedacted }
+            getConclusionRedacted,
+            saveEverythingRedacted,
+            getEverythingRedacted,
+            buildFinalRedaction }

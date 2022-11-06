@@ -31,7 +31,10 @@ export interface IElectronAPI {
   saveRedacParts: (id: number, toSave: [string, srting, string, string, string, string, string, string, string, string, string, string, string, string]) => any,
   getRedacParts: (id: number) => any,
   saveConclusionRedacted: (id: number, conclusionRedacted: any) => any,
-  getConclusionRedacted: (id: number) => any
+  getConclusionRedacted: (id: number) => any,
+  saveEverythingRedacted: (id: number, everythingRedacted: any) => any,
+  getEverythingRedacted: (id: number) => any,
+  buildFinalRedaction: (id: number) => any
 }
 
 declare global {

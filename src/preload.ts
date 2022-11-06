@@ -28,7 +28,10 @@ import {    getProjectFromId,
             saveRedacParts,
             getRedacParts,
             saveConclusionRedacted,
-            getConclusionRedacted
+            getConclusionRedacted,
+            saveEverythingRedacted,
+            getEverythingRedacted,
+            buildFinalRedaction
         } from './database/dbqueries'
 
 
@@ -66,5 +69,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getRedacParts,
     saveRedacParts,
     getConclusionRedacted,
-    saveConclusionRedacted
+    saveConclusionRedacted,
+    getEverythingRedacted,
+    saveEverythingRedacted,
+    buildFinalRedaction
 })

@@ -12,17 +12,28 @@
             <MDBListGroupItem>Une ouverture, c'est-à-dire un élément qui pourrait avoir un lien avec le texte et ta démonstration, et appelle à d'autres réflexions (cette étape est <b>optionnelle</b>).</MDBListGroupItem>
         </MDBListGroup>
     <br/>
-    <p>Le résumé</p>
+    <p><i class="fas fa-chevron-circle-right"></i> Le résumé</p>
     <MDBTextarea rows="4" v-model="summary" />
     <br/>
-    <p>La réponse à la problématique</p>
+    <p><i class="fas fa-chevron-circle-right"></i> La réponse à la problématique</p>
     <MDBTextarea rows="4" v-model="issueAnswer" />
+    <div class="d-flex justify-content-evenly mt-3">
+            <div>
+                <MDBTextarea rows="6" v-model="issue" disabled id="issueHelper" />
+                <div id="issueHelper" class="form-text">
+                    (pour rappel, voici ta problématique).
+                </div>
+            </div>
+        </div>
     <br/>
-    <p>L'ouverture</p>
-    <MDBTextarea rows="4" v-model="opening" />
+    <p><i class="fas fa-chevron-circle-right"></i> L'ouverture</p>
+    <MDBTextarea rows="2" v-model="opening" />
     </div>
-
-
+    <br/><br/>
+    <hr/>
+    <h5 class="text-start">Voici ce que donne ta conclusion (si cela ne te convient pas, modifie les éléments ci-dessus) :</h5>
+    <MDBTextarea disabled rows="4" v-model="getRedactedConclusion" />
+    <br/><br/><p>Ta conclusion te convient ? Passe à la suite !</p>
      <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
 </template>
 
@@ -59,8 +70,16 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
-            window.electronAPI.saveIntroRedacted(this.projectId, this.intro);
+            const conclusion = { "summary": this.summary, "issueAnswer": this.issueAnswer, "opening": this.opening };
+            window.electronAPI.saveConclusionRedacted(this.projectId, conclusion);
             this.$emit('stepCompleted', 'StepRedacConclusion');
+        }
+    },
+
+    computed: {
+        getRedactedConclusion: function() {
+            let result = "      " + this.summary + "\n      " + this.issueAnswer + "\n      " + this.opening;
+            return result
         }
     },
 
@@ -69,6 +88,14 @@ export default defineComponent ({
         if (basicsResult.draftBasics) {
             const basics = JSON.parse(basicsResult.draftBasics);
             this.issue = basics.issue;
+        }
+
+        const conclusionResult = window.electronAPI.getConclusionRedacted(this.projectId);
+        if (conclusionResult.conclusionRedacted) {
+            const conclusion = JSON.parse(conclusionResult.conclusionRedacted);
+            this.summary = conclusion.summary;
+            this.issueAnswer = conclusion.issueAnswer;
+            this.opening = conclusion.opening;
         }
 
         this.$emit('uncompleteStep', 'StepRedacConclusion');
