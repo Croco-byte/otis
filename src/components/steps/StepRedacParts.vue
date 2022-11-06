@@ -37,7 +37,7 @@
                 <MDBTabItem v-if="structure.parts === '3'" tabId="p3s2" href="p3s2">III. Sous-partie 2</MDBTabItem>
                 <i v-if="structure.parts === '3'" class="fas fa-arrow-alt-circle-right align-self-center"></i>
                 <MDBTabItem v-if="structure.parts === '3' && structure.partThree.subparts === '3'" tabId="p3s3" href="p3s3">III. Sous-partie 3</MDBTabItem>
-                <i class="fas fa-arrow-alt-circle-right align-self-center"></i>
+                <i v-if="structure.parts === '3' && structure.partThree.subparts === '3'" class="fas fa-arrow-alt-circle-right align-self-center"></i>
                 <MDBTabItem tabId="end" href="end">Fin rédaction parties <i class="fas fa-flag-checkered"></i></MDBTabItem>
 
         </MDBTabNav>

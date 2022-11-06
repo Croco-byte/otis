@@ -193,6 +193,12 @@ export default defineComponent ({
         },
 
         completeStep: function(completed: string) {
+            if (completed === 'StepEnd') {
+                this.completedSteps['StepEnd'] = true;
+                window.electronAPI.updateCurrentAndCompletedSteps(this.projectId, 'StepEnd', JSON.stringify(this.completedSteps));
+                this.$router.push('/my-projects')
+                return
+            }
             let nextStep = false;
             for (var step in this.completedSteps) {
                 if (nextStep && this.completedSteps[step] != true) {

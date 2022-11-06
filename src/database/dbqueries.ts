@@ -244,48 +244,48 @@ const buildFinalRedaction = function(id: number) {
     redacted += '<h1 style="text-align: center;">' + result.projectName + "</h1>";
     redacted += '<h3 style="text-align: center;">' + result.projectDate + "</h3></div>";
     redacted += "<br/><br/>";
-    redacted += "     " + result.introRedacted + "<br/><br/>";
-    redacted += "<h3>   <b><u>I. " + draftPlanStructure.partOne.title + "</b></u></h3>";
+    redacted += "&emsp;" + result.introRedacted + "<br/><br/>";
+    redacted += "<h3>&emsp;<b><u>I. " + draftPlanStructure.partOne.title + "</b></u></h3>";
     redacted += "<p>" + result.p1Announce + "</p><br/>";
-    redacted += "<h4><i>    1. " + draftPlanStructure.partOne.subpartOneTitle + "</i></h4>";
+    redacted += "<h4><i>&emsp;1. " + draftPlanStructure.partOne.subpartOneTitle + "</i></h4>";
     redacted += "<p>" + result.p1s1Redacted + "</p><br/>";
-    redacted += "<h4><i>    2. " + draftPlanStructure.partOne.subpartTwoTitle + "</i></h4>";
+    redacted += "<h4><i>&emsp;2. " + draftPlanStructure.partOne.subpartTwoTitle + "</i></h4>";
     redacted += "<p>" + result.p1s2Redacted + "</p><br/>";
 
     if (draftPlanStructure.partOne.subparts === '3') {
-        redacted += "<h4><i>    3. " + draftPlanStructure.partOne.subpartThreeTitle + "</i></h4>";
+        redacted += "<h4><i>&emsp;3. " + draftPlanStructure.partOne.subpartThreeTitle + "</i></h4>";
         redacted += "<p>" + result.p1s3Redacted + "</p><br/>";
     }
 
     redacted += "<br/><p>" + result.p1Transition + "</p><br/>";
-    redacted += "<h3>   <b><u>II. " + draftPlanStructure.partTwo.title + "</b></u></h3>";
+    redacted += "<h3>&emsp;<b><u>II. " + draftPlanStructure.partTwo.title + "</b></u></h3>";
     redacted += "<p>" + result.p2Announce + "</p><br/>";
-    redacted += "<h4><i>    1. " + draftPlanStructure.partTwo.subpartOneTitle + "</i></h4>";
+    redacted += "<h4><i>&emsp;1. " + draftPlanStructure.partTwo.subpartOneTitle + "</i></h4>";
     redacted += "<p>" + result.p2s1Redacted + "</p><br/>";
-    redacted += "<h4><i>    2. " + draftPlanStructure.partTwo.subpartTwoTitle + "</i></h4>";
+    redacted += "<h4><i>&emsp;2. " + draftPlanStructure.partTwo.subpartTwoTitle + "</i></h4>";
     redacted += "<p>" + result.p2s2Redacted + "</p><br/>";
 
     if (draftPlanStructure.partTwo.subparts === '3') {
-        redacted += "<h4><i>    3. " + draftPlanStructure.partTwo.subpartThreeTitle + "</i></h4>";
+        redacted += "<h4><i>&emsp;3. " + draftPlanStructure.partTwo.subpartThreeTitle + "</i></h4>";
         redacted += "<p>" + result.p2s3Redacted + "</p><br/>";
     }
 
     if (draftPlanStructure.parts === '3') {
         redacted += "<br/><p>" + result.p2Transition + "</p><br/>";
-        redacted += "<h3>   <b><u>III. " + draftPlanStructure.partThree.title + "</u></b></h3>";
+        redacted += "<h3>&emsp;<b><u>III. " + draftPlanStructure.partThree.title + "</u></b></h3>";
         redacted += "<p>" + result.p3Announce + "</p><br/>";
-        redacted += "<h4><i>    1. " + draftPlanStructure.partThree.subpartOneTitle + "</i></h4>";
+        redacted += "<h4><i>&emsp;1. " + draftPlanStructure.partThree.subpartOneTitle + "</i></h4>";
         redacted += "<p>" + result.p3s1Redacted + "</p><br/>";
-        redacted += "<h4><i>    2. " + draftPlanStructure.partThree.subpartTwoTitle + "</i></h4>";
+        redacted += "<h4><i>&emsp;2. " + draftPlanStructure.partThree.subpartTwoTitle + "</i></h4>";
         redacted += "<p>" + result.p3s2Redacted + "</p><br/>";
 
         if (draftPlanStructure.partThree.subparts === '3') {
-            redacted += "<h4><i>    3. " + draftPlanStructure.partThree.subpartThreeTitle + "</i></h4>";
+            redacted += "<h4><i>&emsp;3. " + draftPlanStructure.partThree.subpartThreeTitle + "</i></h4>";
             redacted += "<p>" + result.p3s3Redacted + "</p><br/>";
         }
     }
 
-    redacted += "<br/><p>   " + conclusion.summary + "\n" + conclusion.issueAnswer + "\n" + conclusion.opening + "</p>";
+    redacted += "<br/><p>&emsp;" + conclusion.summary + "\n" + conclusion.issueAnswer + "\n" + conclusion.opening + "</p>";
 
     return redacted;
 }
