@@ -2,10 +2,7 @@
 
 This is an open-source application to assist students when writing text commentaries. The application is in french at the moment.
 
-The application is built with :
-    - Electron (core of the app).
-    - VueJS (frontend).
-    - SQLite (database).
+The application is built with Electron (core of the app), VueJS (frontend), SQLite (database).
 
 
 ### TODO (french)
