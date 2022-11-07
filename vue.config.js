@@ -8,7 +8,16 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       preload: 'src/preload.ts',
-      externals: [ 'better-sqlite3' ]
+      externals: [ 'better-sqlite3' ],
+      builderOptions: {
+        win: {
+          icon: './logo.ico'
+        },
+        linux: {
+          icon: './logo.ico'
+        }
+      }
+
       // Or, for multiple preload files:
       //preload: { preload: 'src/preload.ts', otherPreload: 'src/preload2.js' }
     }
