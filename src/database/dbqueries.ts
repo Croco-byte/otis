@@ -5,6 +5,17 @@ import { BasicInfoData, DraftBasicData, DraftPlanElementsData, DraftPlanData } f
 let db: any;
 initializeDatabase().then((result) => db = result);
 
+function escapeHtml(unsafe: string | undefined)
+{
+    if (typeof unsafe !== 'string') { return 'no content'; }
+    return (unsafe as string)
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+
 const getProjectFromId = function(id: number) {
     const stmt = db.prepare('SELECT * FROM projects WHERE projectId = ?;')
     const result = stmt.get(id);
@@ -107,20 +118,6 @@ const saveDraftBasics = function(id: number, draftBasics: DraftBasicData) {
 
 const getDraftBasics = function(id: number) {
     const stmt = db.prepare('SELECT draftBasics FROM projects WHERE projectId = ?;')
-    const result = stmt.get(id);
-    return result
-}
-
-// To delete
-const saveDraftPlanData = function(id: number, draftPlanData: DraftPlanData) {
-    const stmt = db.prepare("UPDATE projects SET draftPlanData = ? WHERE projectId = ?;");
-    const result = stmt.run(JSON.stringify(draftPlanData), id);
-    return result.changes
-}
-
-// To delete
-const getDraftPlanData = function(id: number) {
-    const stmt = db.prepare('SELECT draftPlanData FROM projects WHERE projectId = ?;')
     const result = stmt.get(id);
     return result
 }
@@ -243,51 +240,51 @@ const buildFinalRedaction = function(id: number) {
             conclusion = { "summary": "", "issueAnswer": "", "opening": ""};
         }
 
-    redacted += '<h1 style="text-align: center;">' + result.projectName + "</h1>";
-    redacted += '<h3 style="text-align: center;">' + result.projectDate + "</h3></div>";
+    redacted += '<h1 style="text-align: center;">' + escapeHtml(result.projectName) + "</h1>";
+    redacted += '<h3 style="text-align: center;">' + escapeHtml(result.projectDate) + "</h3></div>";
     redacted += "<br/><br/>";
-    redacted += "&emsp;" + result.introRedacted + "<br/><br/>";
-    redacted += "<h3>&emsp;<b><u>I. " + draftPlanStructure.partOne.title + "</b></u></h3>";
-    redacted += "<p>" + result.p1Announce + "</p><br/>";
-    redacted += "<h4><i>&emsp;1. " + draftPlanStructure.partOne.subpartOneTitle + "</i></h4>";
-    redacted += "<p>" + result.p1s1Redacted + "</p><br/>";
-    redacted += "<h4><i>&emsp;2. " + draftPlanStructure.partOne.subpartTwoTitle + "</i></h4>";
-    redacted += "<p>" + result.p1s2Redacted + "</p><br/>";
+    redacted += "&emsp;" + escapeHtml(result.introRedacted) + "<br/><br/>";
+    redacted += "<h3>&emsp;<b><u>I. " + escapeHtml(draftPlanStructure.partOne.title) + "</b></u></h3>";
+    redacted += "<p>" + escapeHtml(result.p1Announce) + "</p><br/>";
+    redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partOne.subpartOneTitle) + "</i></h4>";
+    redacted += "<p>" + escapeHtml(result.p1s1Redacted) + "</p><br/>";
+    redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partOne.subpartTwoTitle) + "</i></h4>";
+    redacted += "<p>" + escapeHtml(result.p1s2Redacted) + "</p><br/>";
 
     if (draftPlanStructure.partOne.subparts === '3') {
-        redacted += "<h4><i>&emsp;3. " + draftPlanStructure.partOne.subpartThreeTitle + "</i></h4>";
-        redacted += "<p>" + result.p1s3Redacted + "</p><br/>";
+        redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partOne.subpartThreeTitle) + "</i></h4>";
+        redacted += "<p>" + escapeHtml(result.p1s3Redacted) + "</p><br/>";
     }
 
-    redacted += "<br/><p>" + result.p1Transition + "</p><br/>";
-    redacted += "<h3>&emsp;<b><u>II. " + draftPlanStructure.partTwo.title + "</b></u></h3>";
-    redacted += "<p>" + result.p2Announce + "</p><br/>";
-    redacted += "<h4><i>&emsp;1. " + draftPlanStructure.partTwo.subpartOneTitle + "</i></h4>";
-    redacted += "<p>" + result.p2s1Redacted + "</p><br/>";
-    redacted += "<h4><i>&emsp;2. " + draftPlanStructure.partTwo.subpartTwoTitle + "</i></h4>";
-    redacted += "<p>" + result.p2s2Redacted + "</p><br/>";
+    redacted += "<br/><p>" + escapeHtml(result.p1Transition) + "</p><br/>";
+    redacted += "<h3>&emsp;<b><u>II. " + escapeHtml(draftPlanStructure.partTwo.title) + "</b></u></h3>";
+    redacted += "<p>" + escapeHtml(result.p2Announce) + "</p><br/>";
+    redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partTwo.subpartOneTitle) + "</i></h4>";
+    redacted += "<p>" + escapeHtml(result.p2s1Redacted) + "</p><br/>";
+    redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partTwo.subpartTwoTitle) + "</i></h4>";
+    redacted += "<p>" + escapeHtml(result.p2s2Redacted) + "</p><br/>";
 
     if (draftPlanStructure.partTwo.subparts === '3') {
-        redacted += "<h4><i>&emsp;3. " + draftPlanStructure.partTwo.subpartThreeTitle + "</i></h4>";
-        redacted += "<p>" + result.p2s3Redacted + "</p><br/>";
+        redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partTwo.subpartThreeTitle) + "</i></h4>";
+        redacted += "<p>" + escapeHtml(result.p2s3Redacted) + "</p><br/>";
     }
 
     if (draftPlanStructure.parts === '3') {
-        redacted += "<br/><p>" + result.p2Transition + "</p><br/>";
-        redacted += "<h3>&emsp;<b><u>III. " + draftPlanStructure.partThree.title + "</u></b></h3>";
-        redacted += "<p>" + result.p3Announce + "</p><br/>";
-        redacted += "<h4><i>&emsp;1. " + draftPlanStructure.partThree.subpartOneTitle + "</i></h4>";
-        redacted += "<p>" + result.p3s1Redacted + "</p><br/>";
-        redacted += "<h4><i>&emsp;2. " + draftPlanStructure.partThree.subpartTwoTitle + "</i></h4>";
-        redacted += "<p>" + result.p3s2Redacted + "</p><br/>";
+        redacted += "<br/><p>" + escapeHtml(result.p2Transition) + "</p><br/>";
+        redacted += "<h3>&emsp;<b><u>III. " + escapeHtml(draftPlanStructure.partThree.title) + "</u></b></h3>";
+        redacted += "<p>" + escapeHtml(result.p3Announce) + "</p><br/>";
+        redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partThree.subpartOneTitle) + "</i></h4>";
+        redacted += "<p>" + escapeHtml(result.p3s1Redacted) + "</p><br/>";
+        redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partThree.subpartTwoTitle) + "</i></h4>";
+        redacted += "<p>" + escapeHtml(result.p3s2Redacted) + "</p><br/>";
 
         if (draftPlanStructure.partThree.subparts === '3') {
-            redacted += "<h4><i>&emsp;3. " + draftPlanStructure.partThree.subpartThreeTitle + "</i></h4>";
-            redacted += "<p>" + result.p3s3Redacted + "</p><br/>";
+            redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partThree.subpartThreeTitle) + "</i></h4>";
+            redacted += "<p>" + escapeHtml(result.p3s3Redacted) + "</p><br/>";
         }
     }
 
-    redacted += "<br/><p>&emsp;" + conclusion.summary + "\n" + conclusion.issueAnswer + "\n" + conclusion.opening + "</p>";
+    redacted += "<br/><p>&emsp;" + escapeHtml(conclusion.summary) + "\n" + escapeHtml(conclusion.issueAnswer) + "\n" + escapeHtml(conclusion.opening) + "</p>";
 
     return redacted;
 }
@@ -307,8 +304,6 @@ export {    getProjectFromId,
             getBasicInfo,
             saveDraftBasics,
             getDraftBasics,
-            saveDraftPlanData,
-            getDraftPlanData,
             saveDraftPlanElements,
             getDraftPlanElements,
             saveDraftPlanStructure,
