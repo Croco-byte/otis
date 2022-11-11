@@ -11,7 +11,7 @@
         <p>Quelques conseils de lecture :</p>
         <MDBListGroup light numbered style="min-width: 22rem">
             <MDBListGroupItem>Pas de panique si tu ne comprends pas tout du premier coup.</MDBListGroupItem>
-            <MDBListGroupItem>Lis doucement, ralentis et revient en arrière si besoin.</MDBListGroupItem>
+            <MDBListGroupItem>Lis doucement, ralentis et reviens en arrière si besoin.</MDBListGroupItem>
             <MDBListGroupItem>Le secret: la <b>concentration</b>.</MDBListGroupItem>
         </MDBListGroup>
         <br/>

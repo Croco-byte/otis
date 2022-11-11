@@ -10,7 +10,8 @@
         <br/><h5>Quelques indications avant de commencer ...</h5>
         <MDBListGroup light numbered style="min-width: 22rem">
             <MDBListGroupItem>Le menu à gauche de l'écran indique les différentes étapes que tu devras suivre afin de produire le document final.</MDBListGroupItem>
-            <MDBListGroupItem>A chaque fois que tu penses avoir terminé une étape, tu pourras cliquer sur le bouton "Confirmer" qui se trouve en bas de l'écran, ce qui finalisera l'étape actuelle, et te fera passer à la suivante.</MDBListGroupItem>
+            <MDBListGroupItem>A chaque fois que tu penses avoir terminé une étape, tu pourras cliquer sur le bouton "Confirmer" qui se trouve en bas de l'écran, ce qui finalisera l'étape actuelle, et te fera passer à la suivante, en sauvegardant ton travail pour cette étape.</MDBListGroupItem>
+            <MDBListGroupItem>Tu peux sauvegarder ton travail avant de compléter toute l'étape (si tu veux faire une pause par exemple) en cliquant sur le bouton "Sauvegarder" qui sera à côté du bouton de confirmation. Pense bien à sauvegarder régulièrement !</MDBListGroupItem>
             <MDBListGroupItem>L'icône <i class="fas fa-edit"></i> indique l'étape actuelle.</MDBListGroupItem>
             <MDBListGroupItem>Il est recommandé, autant que possible, de faire les étapes dans l'ordre.</MDBListGroupItem>
             <MDBListGroupItem>Si tu es bloqué, tu peux cependant sauter une ou plusieurs étapes afin de passer directement à une étape ultérieure, en utilisant le menu de gauche.</MDBListGroupItem>

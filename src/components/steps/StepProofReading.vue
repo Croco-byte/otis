@@ -5,7 +5,7 @@
     </div>
     <!-- Header -->
     <div>
-    <h5>Tu trouveras ci-dessous l'ensemble de ton commentaire de texte, formatté. Tu peux directement modifier le texte et le style.</h5>
+    <h5>Tu trouveras ci-dessous l'ensemble de ton commentaire de texte, formaté. Tu peux directement modifier le texte et le style.</h5>
     <QuillEditor ref="quillEditor" theme="snow" v-model:content="everythingRedacted" contentType="html" toolbar="full"/>
     <br/>
     <p> Utilise ce bouton "Réinitialiser" si tu as fait des modifications mais que tu veux réinitialiser le contenu rédigé ci-dessus (attention, toutes tes modifications seront perdues).</p>
@@ -13,7 +13,10 @@
     </div>
 
     <hr/>
-     <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
+     <div>
+        <MDBBtn color="dark" block class="w-25 mb-4" v-on:click="saveStep()">Sauvegarder</MDBBtn>
+        <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
+    </div>
 </template>
 
 <script lang="ts">
@@ -42,8 +45,14 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
-            window.electronAPI.saveEverythingRedacted(this.projectId, this.everythingRedacted);
+            this.saveStep();
             this.$emit('stepCompleted', 'StepProofReading');
+        },
+
+        saveStep: function() {
+            const result = window.electronAPI.saveEverythingRedacted(this.projectId, this.everythingRedacted);
+            if (result > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+            else { this.$toast.error('Erreur lors de la sauvegarde :('); }
         },
 
         resetRedactedText: function() {

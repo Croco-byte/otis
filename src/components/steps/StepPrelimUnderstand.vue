@@ -14,7 +14,7 @@
             <MDBListGroupItem>Je déduis ce que je ne comprends pas.</MDBListGroupItem>
         </MDBListGroup>
         <br/>
-        <p>Prend le temps de te poser pour cette étape. Tu n'as pas besoin de noter quoi que ce soit, mais imprègne toi bien du texte et de son sens.</p>
+        <p>Prends le temps de te poser pour cette étape. Tu n'as pas besoin de noter quoi que ce soit, mais imprègne toi bien du texte et de son sens.</p>
     </div>
 
     <div>

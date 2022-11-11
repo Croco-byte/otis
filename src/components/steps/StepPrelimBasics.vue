@@ -17,7 +17,7 @@
                     <span class="float-end" v-on:click="popoverTheme = !popoverTheme"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                 </template>
                 <template #header>Le thème du texte</template>
-                <template #body>Il s'agit ici assez simplement de résumer tout ce que tu comprends. Le thème du texte fait donc référence à ce dont le texte parle, de manière générale, pour toi.</template>
+                <template #body>Il s'agit ici assez simplement de résumer tout ce que tu comprends. Le thème du texte fait donc référence à ce dont le texte parle, de manière générale.</template>
             </MDBPopover>
         </div>
         <MDBTextarea rows="4" v-model="theme" wrapperClass="mb-4" />
@@ -64,6 +64,7 @@
     </div>
 
     <div>
+        <MDBBtn color="dark" v-on:click="saveStep()">Sauvegarder</MDBBtn>
         <MDBBtn color="danger" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
     </div>
 </div>
@@ -74,13 +75,13 @@ import { ref } from 'vue';
 import { defineComponent } from '@vue/runtime-core';
 import { MDBBtn, MDBInput, MDBTextarea, MDBPopover } from 'mdb-vue-ui-kit'
 
-interface StepPrelimBasicsVueData
+/*interface StepPrelimBasicsVueData
 {
     theme: string,
     genre: string,
     type: string,
     goal: string
-}
+} */
 
 export default defineComponent ({
     emits: ['stepCompleted', 'uncompleteStep'],
@@ -104,7 +105,7 @@ export default defineComponent ({
       }
     },
 
-    data(): StepPrelimBasicsVueData {
+    data(): any {
         return {
             theme: "",
             genre: "",
@@ -115,10 +116,16 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
-            const basicInfo = { "theme": this.theme, "genre": this.genre, "type": this.type, "goal": this.goal };
-            window.electronAPI.saveBasicInfo(this.projectId, basicInfo);
+            this.saveStep();
             this.$emit('stepCompleted', 'StepPrelimBasics');
         },
+
+        saveStep: function() {
+            const basicInfo = { "theme": this.theme, "genre": this.genre, "type": this.type, "goal": this.goal };
+            const result = window.electronAPI.saveBasicInfo(this.projectId, basicInfo);
+            if (result > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+            else { this.$toast.error('Erreur lors de la sauvegarde :('); }
+        }
     },
 
     created() {

@@ -34,7 +34,10 @@
     <h5 class="text-start">Voici ce que donne ta conclusion (si cela ne te convient pas, modifie les éléments ci-dessus) :</h5>
     <MDBTextarea disabled rows="4" v-model="getRedactedConclusion" />
     <br/><br/><p>Ta conclusion te convient ? Passe à la suite !</p>
-     <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
+    <div>
+        <MDBBtn color="dark" block class="w-25 mb-4" v-on:click="saveStep()">Sauvegarder</MDBBtn>
+        <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
+    </div>
 </template>
 
 <script lang="ts">
@@ -70,9 +73,15 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
-            const conclusion = { "summary": this.summary, "issueAnswer": this.issueAnswer, "opening": this.opening };
-            window.electronAPI.saveConclusionRedacted(this.projectId, conclusion);
+            this.saveStep();
             this.$emit('stepCompleted', 'StepRedacConclusion');
+        },
+
+        saveStep: function() {
+            const conclusion = { "summary": this.summary, "issueAnswer": this.issueAnswer, "opening": this.opening };
+            const result = window.electronAPI.saveConclusionRedacted(this.projectId, conclusion);
+            if (result > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+            else { this.$toast.error('Erreur lors de la sauvegarde :('); }
         }
     },
 

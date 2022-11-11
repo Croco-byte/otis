@@ -25,6 +25,9 @@
               <MDBRadio label="Trois sous-parties" id="3" v-model="structure.partOne.subparts" value="3" />
             </div>
             <br/><br/>
+            <h5>Déplace les éléments comme tu l'as fait dans l'étape précédente pour les parties.</h5>
+            <h5>N'oublie pas de donner un titre à tes sous-parties dans les encadrés du tableau ci-dessous !</h5>
+            <br/>
             <div class="border text-center">
                 <h4> Éléments non-catégorisés </h4>
                 <div class="border border-2 border-dark" style="min-height: 100px;">
@@ -210,7 +213,10 @@
         </MDBTabContent>
     </MDBTabs>
     <br/><br/>
-     <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
+    <div>
+        <MDBBtn color="dark" block class="w-25 mb-4" v-on:click="saveStep()">Sauvegarder</MDBBtn>
+        <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
+    </div>
 </template>
 
 <script lang="ts">
@@ -269,6 +275,11 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
+            this.saveStep();
+            this.$emit('stepCompleted', 'StepDraftPlanSubparts');
+        },
+
+        saveStep: function() {
             for (var i = 0; i < this.elements.length; i++) {
                 if (this.p1su.includes(this.elements[i].data)) { this.elements[i].category = "p1"; continue }
                 if (this.p1s1.includes(this.elements[i].data)) { this.elements[i].category = "p1s1"; continue }
@@ -288,10 +299,10 @@ export default defineComponent ({
             var allElements = JSON.parse(JSON.stringify(this.elements))
             window.electronAPI.saveDraftPlanElements(this.projectId, { "elements": allElements });
 
-            window.electronAPI.saveDraftPlanStructure(this.projectId, JSON.parse(JSON.stringify(this.structure)));
-
-            this.$emit('stepCompleted', 'StepDraftPlanSubparts');
-        }
+            const result = window.electronAPI.saveDraftPlanStructure(this.projectId, JSON.parse(JSON.stringify(this.structure)));
+            if (result > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+            else { this.$toast.error('Erreur lors de la sauvegarde :('); }
+        },
     },
 
     computed: {

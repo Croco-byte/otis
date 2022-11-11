@@ -94,7 +94,8 @@
     </div>
     <br/>
     <div>
-        <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
+        <MDBBtn color="dark" block class="w-25 mb-4" v-on:click="saveStep()">Sauvegarder</MDBBtn>
+        <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
     </div>
 </template>
 
@@ -135,9 +136,14 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
-            console.log(this.analysisElements);
-            window.electronAPI.saveAnalysis(this.projectId, JSON.parse(JSON.stringify(this.analysisElements)));
+            this.saveStep();
             this.$emit('stepCompleted', 'StepAnalysis');
+        },
+
+        saveStep: function() {
+            const result = window.electronAPI.saveAnalysis(this.projectId, JSON.parse(JSON.stringify(this.analysisElements)));
+            if (result > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+            else { this.$toast.error('Erreur lors de la sauvegarde :('); }
         },
 
         addAnalysisElement: function() {

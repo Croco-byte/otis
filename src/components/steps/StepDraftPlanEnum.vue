@@ -8,7 +8,7 @@
         <br/>
         <h5>Il est maintenant temps d'élaborer ton plan. Pour cela, commençons par faire un peu de repérage.</h5>
         <br/>
-        <span><i class="fas fa-chevron-circle-right"></i> Liste ci-dessous, en vrac, tout ce qui te paraît important dans le texte (thèmes, registre, énonciation, etc.), sous la forme d'un mot ou d'une courte phrase qui représente l'élément. Essaie d'avoir une liste d'environ <b>6-10 éléments</b>. Tu peux avoir besoin de relire le texte plusieurs fois.
+        <span><i class="fas fa-chevron-circle-right"></i> Liste ci-dessous, en vrac, tout ce qui te paraît important dans le texte (thème(s), registre(s), énonciation, etc.), sous la forme d'un mot ou d'une courte phrase qui représente l'élément. Essaie d'avoir une liste d'environ <b>6-10 éléments</b>. Tu peux avoir besoin de relire le texte plusieurs fois.
         <br/><br/> Appuie sur le bouton <i class="fa fa-plus-circle"></i> pour ajouter des éléments, et sur le bouton <i class="fa fa-minus-circle"></i> pour en supprimer.</span>
         <br/>
         <br/>
@@ -22,7 +22,10 @@
     </div>
     <h6 v-if="errorMsg" class="text-danger">Erreur: {{ errorMsg }}</h6>
     <br/>
-     <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
+    <div>
+     <MDBBtn color="dark" block class="w-25 mb-4" v-on:click="saveStep()">Sauvegarder</MDBBtn>
+     <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
+    </div>
 </template>
 
 <script lang="ts">
@@ -53,11 +56,17 @@ export default defineComponent ({
             if (this.elements.length < 3 || this.elements.length > 20) {
                 this.errorMsg = "Pour compléter cette étape, tu dois avoir entre 3 et 20 éléments dans ta liste."
             } else {
-                var allElements = JSON.parse(JSON.stringify(this.elements))
-                allElements = allElements.filter(function(el: any) { if (el.data) {return el} })
-                window.electronAPI.saveDraftPlanElements(this.projectId, { "elements": allElements });
+                this.saveStep();
                 this.$emit('stepCompleted', 'StepDraftPlanEnum');
             }
+        },
+
+        saveStep: function() {
+                var allElements = JSON.parse(JSON.stringify(this.elements))
+                allElements = allElements.filter(function(el: any) { if (el.data) {return el} })
+                const result = window.electronAPI.saveDraftPlanElements(this.projectId, { "elements": allElements });
+                if (result > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+                else { this.$toast.error('Erreur lors de la sauvegarde :('); }
         },
 
         addDraftPlanElement: function() {

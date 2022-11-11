@@ -29,6 +29,14 @@
         <br/>
         <MDBBtn class="w-25 align-self-center" outline="dark" v-on:click="checkOrder()">Vérifier l'ordre !</MDBBtn>
         <h6 class="text-danger align-self-center mt-2" v-if="orderCheckError">{{ orderCheckError }}</h6>
+        <div class="d-flex flex-column" v-if="tries > 2">
+            <br/>
+            <MDBBtn class="align-self-center" color="danger" v-on:click="collapseSolution = !collapseSolution" aria-controls="collapsibleContentSolution" :aria-expanded="collapseSolution">Afficher/cacher la solution</MDBBtn>
+            <MDBCollapse id="collapsibleContentSolution" v-model="collapseSolution" >
+                <br/>
+                <p class="text-center">Le bon ordre est : auteur, oeuvre, texte/extrait, problématique, annonce de plan.</p>
+            </MDBCollapse>
+        </div>
       </div>
     </div>
 
@@ -58,7 +66,7 @@
                     <span class="float-end" v-on:click="popoverWork = !popoverWork"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                 </template>
                 <template #header>L'oeuvre de laquelle est tirée le texte</template>
-                <template #body>Indique ici des informations relatives à l'oeuvre de laquelle est tirée le texte. Typiquement le titre du livre, la date de publication, et toute autre information utile relative à l'oeuvre.</template>
+                <template #body>Indique ici des informations relatives à l'oeuvre de laquelle est tirée le texte. Il s'agit principalement du genre et du type de l'oeuvre (appuie-toi sur ce que tu as déjà noté à ce sujet, et qui est affiché en aide ci-dessous), ainsi que de toute autre information utile relative à l'oeuvre (le titre du livre, la date de publication ...).</template>
             </MDBPopover>
         </div>
         <MDBTextarea v-model="work" wrapperClass="mb-4"/>
@@ -88,7 +96,7 @@
                     <span class="float-end" v-on:click="popoverText = !popoverText"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                 </template>
                 <template #header>Le texte lui-même</template>
-                <template #body>Indique ici des informations relatives au texte lui-même. Tu peux par exemple reprendre le thème du texte, résumer le texte, lister les registres lexicaux utilisés, et toute autre information utile qui se rappore au texte.</template>
+                <template #body>Indique ici des informations relatives au texte lui-même. Tu peux par exemple reprendre le thème du texte, résumer le texte, donner les registres littéraires utilisés, et toute autre information utile qui se rapporte au texte.</template>
             </MDBPopover>
         </div>
         <MDBTextarea v-model="text" wrapperClass="mb-4"/>
@@ -131,6 +139,7 @@
 
 
     <div v-if="orderChecked">
+        <MDBBtn color="dark" v-on:click="saveStep()">Sauvegarder</MDBBtn>
         <MDBBtn color="danger" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
     </div>
     
@@ -142,7 +151,7 @@
 import { ref } from 'vue'
 import { defineComponent } from '@vue/runtime-core';
 import draggable from 'vuedraggable'
-import { MDBBtn, MDBTextarea, MDBPopover } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBTextarea, MDBPopover, MDBCollapse } from 'mdb-vue-ui-kit'
 
 /*interface StepDraftBasicsVueData
 {
@@ -156,18 +165,21 @@ export default defineComponent ({
         draggable,
         MDBBtn,
         MDBTextarea,
-        MDBPopover
+        MDBPopover,
+        MDBCollapse,
     },
     setup() {
       const popoverAuthor = ref(false);
       const popoverWork = ref(false);
       const popoverText = ref(false);
       const popoverIssue = ref(false);
+      const collapseSolution = ref(false);
       return {
         popoverAuthor,
         popoverWork,
         popoverText,
-        popoverIssue
+        popoverIssue,
+        collapseSolution
       }
     },
 
@@ -177,6 +189,7 @@ export default defineComponent ({
             // Order minigame data
             dragging: false,
             enabled: true,
+            tries: 0,
             orderCheckError: "",
             orderCheckConfirm: "",
             list: [ {name: "Oeuvre"},
@@ -204,14 +217,20 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
+            this.saveStep();
+            this.$emit('stepCompleted', 'StepDraftBasics');
+        },
+
+        saveStep: function() {
             const draftBasics = {   "orderChecked": this.orderChecked,
                                     "author": this.author,
                                     "work": this.work,
                                     "text": this.text,
                                     "issue": this.issue
                                 };
-            window.electronAPI.saveDraftBasics(this.projectId, draftBasics);
-            this.$emit('stepCompleted', 'StepDraftBasics');
+            const result = window.electronAPI.saveDraftBasics(this.projectId, draftBasics);
+            if (result > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+            else { this.$toast.error('Erreur lors de la sauvegarde :('); }
         },
 
         checkOrder: function() {
@@ -224,7 +243,8 @@ export default defineComponent ({
                     this.orderCheckConfirm = "Bien joué ! Tu as trouvé le bon ordre.";
                 }
             else {
-                this.orderCheckError = "Cet ordre n'est pas le bon !"
+                this.orderCheckError = "Cet ordre n'est pas le bon !";
+                this.tries += 1;
             }
         }
     },

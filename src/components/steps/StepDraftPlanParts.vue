@@ -12,7 +12,8 @@
         </div>
         <br/>
         <br/>
-        <h5>Tu peux maintenant, ci-dessous, organiser les éléments que tu avais repéré à l'étape précédente dans tes parties, auxquelles tu peux donner un titre. Utilise la souris pour déplacer les éléments dans les différentes colonnes.</h5>
+        <h5>Tu peux maintenant, ci-dessous, organiser les éléments que tu avais repérés à l'étape précédente dans tes parties, auxquelles tu peux donner un titre. Utilise la souris pour déplacer les éléments dans les différentes colonnes.</h5>
+        <h5>N'oublie pas également de donner un titre à tes parties dans les encadrés du tableau ci-dessous !</h5>
         <br/>
         <div class="d-flex flex-column border">
             <div class="border text-center">
@@ -72,7 +73,10 @@
 
     </div>
     <br/>
-    <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
+    <div>
+        <MDBBtn color="dark" block class="w-25 mb-4" v-on:click="saveStep()">Sauvegarder</MDBBtn>
+        <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
+    </div>
 </template>
 
 <script lang="ts">
@@ -112,12 +116,11 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
-            //console.log(this.partsNumber);
-            /*console.log(this.uncategorized);
-            console.log(this.partOne);
-            console.log(this.partTwo);
-            console.log(this.partThree); */
+            this.saveStep();
+            this.$emit('stepCompleted', 'StepDraftPlanParts');
+        },
 
+        saveStep: function() {
             for (var i = 0; i < this.elements.length; i++) {
                 if (this.uncategorized.includes(this.elements[i].data)) { this.elements[i].category = "uncategorized" }
                 if (this.partOne.includes(this.elements[i].data) && this.elements[i].category.startsWith('p1') !== true) { this.elements[i].category = "p1" }
@@ -125,15 +128,15 @@ export default defineComponent ({
                 if (this.partThree.includes(this.elements[i].data) && this.elements[i].category.startsWith('p3') !== true) { this.elements[i].category = "p3" }
             }
             var allElements = JSON.parse(JSON.stringify(this.elements))
-            window.electronAPI.saveDraftPlanElements(this.projectId, { "elements": allElements });
+            const result1 = window.electronAPI.saveDraftPlanElements(this.projectId, { "elements": allElements });
 
             this.structure.parts = this.partsNumber;
             this.structure.partOne.title = this.partOneTitle;
             this.structure.partTwo.title = this.partTwoTitle;
             this.structure.partThree.title = this.partThreeTitle;
-            window.electronAPI.saveDraftPlanStructure(this.projectId, JSON.parse(JSON.stringify(this.structure)));
-
-            this.$emit('stepCompleted', 'StepDraftPlanParts');
+            const result2 = window.electronAPI.saveDraftPlanStructure(this.projectId, JSON.parse(JSON.stringify(this.structure)));
+            if (result1 > 0 && result2 > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+            else { this.$toast.error('Erreur lors de la sauvegarde :('); }
         },
     },
 

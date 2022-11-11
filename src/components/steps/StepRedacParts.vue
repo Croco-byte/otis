@@ -57,7 +57,7 @@
                 </MDBPopover>
                 </div>
                 <MDBTextarea rows="5" label="Annonce de la 1ère partie" v-model="p1A" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1A')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1A')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p1s1">
@@ -86,7 +86,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction première sous-partie" v-model="p1s1" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1s1')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1s1')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p1s2">
@@ -115,7 +115,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction seconde sous-partie" v-model="p1s2" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1s2')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1s2')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p1s3">
@@ -144,7 +144,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction troisième sous-partie" v-model="p1s3" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1s3')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1s3')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p1T">
@@ -161,7 +161,7 @@
                 </MDBPopover>
                 </div>
                 <MDBTextarea rows="5" label="Transition première partie" v-model="p1T" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1T')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p1T')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p2A">
@@ -178,7 +178,7 @@
                 </MDBPopover>
                 </div>
                 <MDBTextarea rows="5" label="Annonce de la seconde partie" v-model="p2A" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2A')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2A')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p2s1">
@@ -207,7 +207,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction première sous-partie" v-model="p2s1" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2s1')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2s1')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p2s2">
@@ -236,7 +236,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction seconde sous-partie" v-model="p2s2" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2s2')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2s2')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p2s3">
@@ -265,7 +265,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction troisième sous-partie" v-model="p2s3" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2s3')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2s3')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p2T">
@@ -282,7 +282,7 @@
                 </MDBPopover>
                 </div>
                 <MDBTextarea rows="5" label="Transition première partie" v-model="p2T" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2T')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p2T')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p3A">
@@ -299,7 +299,7 @@
                 </MDBPopover>
                 </div>
                 <MDBTextarea rows="5" label="Annonce de la troisième partie" v-model="p3A" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p3A')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p3A')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p3s1">
@@ -328,7 +328,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction première sous-partie" v-model="p3s1" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p3s1')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p3s1')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p3s2">
@@ -357,7 +357,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction seconde sous-partie" v-model="p3s2" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p3s2')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p3s2')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="p3s3">
@@ -386,7 +386,7 @@
                 <br/>
                 <p class="text-start"><i>Espace de rédaction :</i></p>
                 <MDBTextarea rows="8" label="Rédaction troisième sous-partie" v-model="p3s3" wrapperClass="mb-4"/>
-                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p3s3')">Next</MDBBtn>
+                <MDBBtn color="dark" v-on:click="activeTabId1 = getNextRedacStep('p3s3')">Suivant</MDBBtn>
             </MDBTabPane>
 
             <MDBTabPane tabId="end">
@@ -403,14 +403,14 @@
          <hr/>
          <div class="d-flex justify-content-center">
          <MDBBtn color="dark" class="w-25 mb-4" v-on:click="saveEverything()">Sauvegarder</MDBBtn>
-         <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
+         <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
         </div>
      </div>
 </div>
 </template>
 
 <script lang="ts">
-import {ref } from 'vue';
+import { ref } from 'vue';
 import { defineComponent } from '@vue/runtime-core';
 import { MDBBtn, MDBTextarea, MDBTabNav, MDBTabs, MDBTabItem, MDBTabContent, MDBTabPane, MDBPopover, MDBInput, MDBTable } from 'mdb-vue-ui-kit'
 
@@ -471,6 +471,7 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
+            this.saveEverything();
             this.$emit('stepCompleted', 'StepRedacParts');
         },
 

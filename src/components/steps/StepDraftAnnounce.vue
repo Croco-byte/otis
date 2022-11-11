@@ -13,7 +13,10 @@
     <br/>
     <MDBTextarea rows="5" label="Ton annonce de plan" v-model="draftAnnounce" wrapperClass="mb-4"/>
 
-     <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer</MDBBtn>
+    <div>
+        <MDBBtn color="dark" block class="w-25 mb-4" v-on:click="saveStep()">Sauvegarder</MDBBtn>
+        <MDBBtn color="danger" block class="w-25 mb-4" v-on:click="completeStep()">Confirmer ➤</MDBBtn>
+    </div>
 </template>
 
 <script lang="ts">
@@ -42,8 +45,14 @@ export default defineComponent ({
 
     methods: {
         completeStep: function() {
-            window.electronAPI.saveDraftAnnounce(this.projectId, this.draftAnnounce);
+            this.saveStep();
             this.$emit('stepCompleted', 'StepDraftAnnounce');
+        },
+
+        saveStep: function() {
+            const result = window.electronAPI.saveDraftAnnounce(this.projectId, this.draftAnnounce);
+            if (result > 0) { this.$toast.success('Sauvegardé avec succès !'); }
+            else { this.$toast.error('Erreur lors de la sauvegarde :('); }
         }
     },
 
