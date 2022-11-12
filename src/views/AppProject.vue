@@ -72,6 +72,11 @@
                             <a href="javascript:void(0)" style="color: #A8213D;" v-on:click="changeCurrentStep('StepDraftAnnounce')">L'annonce de plan
                             <span v-if="currentStep === 'StepDraftAnnounce'" style="float: right;"><i class="fas fa-edit"></i></span></a>
                         </MDBListGroupItem>
+                        <MDBListGroupItem tag="label" class="list-group-item-danger">
+                            <input class="form-check-input me-1" disabled type="checkbox" :checked="completedSteps['StepDraftRecap'] ? true : undefined" value="" />
+                            <a href="javascript:void(0)" style="color: #A8213D;" v-on:click="changeCurrentStep('StepDraftRecap')">Récapitulatif brouillon
+                            <span v-if="currentStep === 'StepDraftRecap'" style="float: right;"><i class="fas fa-edit"></i></span></a>
+                        </MDBListGroupItem>
                     </MDBListGroup>
                 </MDBListGroupItem>
                 <MDBListGroupItem tag="label" class="list-group-item-danger">
@@ -135,6 +140,7 @@ import StepDraftPlanEnum from '../components/steps/StepDraftPlanEnum.vue';
 import StepDraftPlanParts from '../components/steps/StepDraftPlanParts.vue';
 import StepDraftPlanSubparts from '../components/steps/StepDraftPlanSubparts.vue';
 import StepDraftAnnounce from '../components/steps/StepDraftAnnounce.vue';
+import StepDraftRecap from '../components/steps/StepDraftRecap.vue';
 import StepAnalysis from '../components/steps/StepAnalysis.vue';
 import StepRedacAdvices from '../components/steps/StepRedacAdvices.vue';
 import StepRedacIntro from '../components/steps/StepRedacIntro.vue';
@@ -165,6 +171,7 @@ export default defineComponent ({
         StepDraftPlanParts,
         StepDraftPlanSubparts,
         StepDraftAnnounce,
+        StepDraftRecap,
         StepAnalysis,
         StepRedacAdvices,
         StepRedacIntro,

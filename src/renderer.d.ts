@@ -32,7 +32,8 @@ export interface IElectronAPI {
   getConclusionRedacted: (id: number) => any,
   saveEverythingRedacted: (id: number, everythingRedacted: any) => any,
   getEverythingRedacted: (id: number) => any,
-  buildFinalRedaction: (id: number) => any
+  buildFinalRedaction: (id: number) => any,
+  buildDraftRecap: (id: number) => any,
 }
 
 declare global {

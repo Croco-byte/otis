@@ -14,7 +14,7 @@ module.exports = {
           icon: './logo.ico'
         },
         linux: {
-          icon: './logo.ico'
+          icon: './logo.png'
         }
       }
 

@@ -29,7 +29,7 @@
         <br/>
         <MDBBtn class="w-25 align-self-center" outline="dark" v-on:click="checkOrder()">Vérifier l'ordre !</MDBBtn>
         <h6 class="text-danger align-self-center mt-2" v-if="orderCheckError">{{ orderCheckError }}</h6>
-        <div class="d-flex flex-column" v-if="tries > 2">
+        <div class="d-flex flex-column" v-if="tries >= 2">
             <br/>
             <MDBBtn class="align-self-center" color="danger" v-on:click="collapseSolution = !collapseSolution" aria-controls="collapsibleContentSolution" :aria-expanded="collapseSolution">Afficher/cacher la solution</MDBBtn>
             <MDBCollapse id="collapsibleContentSolution" v-model="collapseSolution" >

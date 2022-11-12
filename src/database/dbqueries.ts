@@ -59,6 +59,7 @@ const createNewProject = function(projectData: ProjectRegistrationData) {
                     'StepDraftPlanParts':       false,
                     'StepDraftPlanSubparts':    false,
                     'StepDraftAnnounce':        false,
+                    'StepDraftRecap':           false,
                     'StepAnalysis':             false,
                     'StepRedacAdvices':         false,
                     'StepRedacIntro':           false,
@@ -218,6 +219,167 @@ const saveEverythingRedacted = function(id: number, everythingRedacted: string) 
     return result.changes
 }
 
+const buildDraftRecap = function(id: number) {
+    let redacted = "";
+    let prelimBasics: any = { "theme": "", "genre": "", "type": "", "goal": "" };
+    let draftBasics: any = { "orderCheck": false, "author": "", "work": "", "text": "", "issue": "" } ;
+    let draftPlanStructure: any = {};
+    let draftPlanElements: any = [];
+    let p1s1: any = [];
+    let p1s2: any = [];
+    let p1s3: any = [];
+    let p2s1: any = [];
+    let p2s2: any = [];
+    let p2s3: any = [];
+    let p3s1: any = [];
+    let p3s2: any = [];
+    let p3s3: any = [];
+
+    const stmt = db.prepare('SELECT projectName, projectDate, prelimBasics, draftBasics, draftPlanStructure, draftPlanElements, draftAnnounce FROM projects WHERE projectId = ?;');
+    const result = stmt.get(id);
+
+    if (result.prelimBasics) {
+        prelimBasics = JSON.parse(result.prelimBasics)
+    } 
+
+    if (result.draftBasics) {
+        draftBasics = JSON.parse(result.draftBasics);
+    }
+
+    if (result.draftPlanElements) {
+        draftPlanElements = (JSON.parse(result.draftPlanElements)).elements
+    }
+
+    for (var i = 0; i < draftPlanElements.length; i++) {
+            if (draftPlanElements[i].category === 'p1s1' ) { p1s1.push(draftPlanElements[i].data); continue }
+            if (draftPlanElements[i].category === 'p1s2' ) { p1s2.push(draftPlanElements[i].data); continue }
+            if (draftPlanElements[i].category === 'p1s3' ) { p1s3.push(draftPlanElements[i].data); continue }
+
+            if (draftPlanElements[i].category === 'p2s1' ) { p2s1.push(draftPlanElements[i].data); continue }
+            if (draftPlanElements[i].category === 'p2s2' ) { p2s2.push(draftPlanElements[i].data); continue }
+            if (draftPlanElements[i].category === 'p2s3' ) { p2s3.push(draftPlanElements[i].data); continue }
+
+            if (draftPlanElements[i].category === 'p3s1' ) { p3s1.push(draftPlanElements[i].data); continue }
+            if (draftPlanElements[i].category === 'p3s2' ) { p3s2.push(draftPlanElements[i].data); continue }
+            if (draftPlanElements[i].category === 'p3s3' ) { p3s3.push(draftPlanElements[i].data); continue }
+    }
+
+    if (result.draftPlanStructure) {
+        draftPlanStructure = JSON.parse(result.draftPlanStructure);
+    } else {
+        draftPlanStructure = { "parts": '2', "partOne": { "title": "Première partie", "subparts": '2', "subpartOneTitle": "Sous-partie 1", "subpartTwoTitle": "Sous-partie 2", "subpartThreeTitle": "Sous-partie 3" },
+                                             "partTwo": { "title": "Deuxième partie", "subparts": '2', "subpartOneTitle": "Sous-partie 1", "subpartTwoTitle": "Sous-partie 2", "subpartThreeTitle": "Sous-partie 3" },
+                                             "partThree": { "title": "Troisième partie", "subparts": '2', "subpartOneTitle": "Sous-partie 1", "subpartTwoTitle": "Sous-partie 2", "subpartThreeTitle": "Sous-partie 3" }}
+    }
+
+    redacted += '<h1 style="text-align: center;">' + escapeHtml(result.projectName) + " - Brouillon</h1>";
+    redacted += '<h3 style="text-align: center;">' + escapeHtml(result.projectDate) + "</h3></div>";
+    redacted += "<br/><br/>";
+    redacted += "<h3>Les bases</h3><br/>";
+    redacted += "<h6>➤ Le thème du texte</h6>";
+    redacted += "<p>" + escapeHtml(prelimBasics.theme) + "</p>";
+    redacted += "<h6>➤ Le genre du texte</h6>";
+    redacted += "<p>" + escapeHtml(prelimBasics.genre) + "</p>";
+    redacted += "<h6>➤ Le type du texte</h6>";
+    redacted += "<p>" + escapeHtml(prelimBasics.type) + "</p>";
+    redacted += "<h6>➤ Le but du texte</h6>";
+    redacted += "<p>" + escapeHtml(prelimBasics.goal) + "</p>";
+    
+    redacted += "<br/><br/>";
+    redacted += "<h3>Brouillon: éléments de base</h3><br/>";
+    redacted += "<h6>➤ L'auteur</h6>";
+    redacted += "<p>" + escapeHtml(draftBasics.author) + "</p>";
+    redacted += "<h6>➤ L'oeuvre'</h6>";
+    redacted += "<p>" + escapeHtml(draftBasics.work) + "</p>";
+    redacted += "<h6>➤ Le texte</h6>";
+    redacted += "<p>" + escapeHtml(draftBasics.text) + "</p>";
+    redacted += "<h6>➤ La problématique</h6>";
+    redacted += "<p>" + escapeHtml(prelimBasics.issue) + "</p>";
+
+    redacted += "<br/><br/>";
+    redacted += "<h3>Brouillon: plan et éléments</h3><br/>";
+
+    redacted += "<h4>&emsp;<b><u>I. " + escapeHtml(draftPlanStructure.partOne.title) + "</b></u></h4>";
+    redacted += "<h5><i>&emsp;1. " + escapeHtml(draftPlanStructure.partOne.subpartOneTitle) + "</i></h5>";
+    redacted += "<ul>"
+    for (var i = 0; i < p1s1.length; i++) {
+        redacted += "<li>" + escapeHtml(p1s1[i]) + "</li>"
+    }
+    redacted += "</ul>"
+
+    redacted += "<h5><i>&emsp;2. " + escapeHtml(draftPlanStructure.partOne.subpartTwoTitle) + "</i></h5>";
+    redacted += "<ul>"
+    for (var i = 0; i < p1s2.length; i++) {
+        redacted += "<li>" + escapeHtml(p1s2[i]) + "</li>"
+    }
+    redacted += "</ul>"
+
+    if (draftPlanStructure.partOne.subparts === '3') {
+        redacted += "<h5><i>&emsp;3. " + escapeHtml(draftPlanStructure.partOne.subpartThreeTitle) + "</i></h5>";
+        redacted += "<ul>"
+        for (var i = 0; i < p1s3.length; i++) {
+            redacted += "<li>" + escapeHtml(p1s3[i]) + "</li>"
+        }
+        redacted += "</ul>"
+    }
+
+    redacted += "<h4>&emsp;<b><u>II. " + escapeHtml(draftPlanStructure.partTwo.title) + "</b></u></h4>";
+    redacted += "<h5><i>&emsp;1. " + escapeHtml(draftPlanStructure.partTwo.subpartOneTitle) + "</i></h5>";
+    redacted += "<ul>"
+    for (var i = 0; i < p2s1.length; i++) {
+        redacted += "<li>" + escapeHtml(p2s1[i]) + "</li>"
+    }
+    redacted += "</ul>"
+
+    redacted += "<h5><i>&emsp;2. " + escapeHtml(draftPlanStructure.partTwo.subpartTwoTitle) + "</i></h5>";
+    redacted += "<ul>"
+    for (var i = 0; i < p2s2.length; i++) {
+        redacted += "<li>" + escapeHtml(p2s2[i]) + "</li>"
+    }
+    redacted += "</ul>"
+
+    if (draftPlanStructure.partTwo.subparts === '3') {
+        redacted += "<h5><i>&emsp;3. " + escapeHtml(draftPlanStructure.partTwo.subpartThreeTitle) + "</i></h5>";
+        redacted += "<ul>"
+        for (var i = 0; i < p2s3.length; i++) {
+            redacted += "<li>" + escapeHtml(p2s3[i]) + "</li>"
+        }
+        redacted += "</ul>"
+    }
+
+    if (draftPlanStructure.parts === '3') {
+        redacted += "<h4>&emsp;<b><u>III. " + escapeHtml(draftPlanStructure.partThree.title) + "</b></u></h4>";
+        redacted += "<h5><i>&emsp;1. " + escapeHtml(draftPlanStructure.partThree.subpartOneTitle) + "</i></h5>";
+        redacted += "<ul>"
+        for (var i = 0; i < p3s1.length; i++) {
+            redacted += "<li>" + escapeHtml(p3s1[i]) + "</li>"
+        }
+        redacted += "</ul>"
+
+        redacted += "<h5><i>&emsp;2. " + escapeHtml(draftPlanStructure.partThree.subpartTwoTitle) + "</i></h5>";
+        redacted += "<ul>"
+        for (var i = 0; i < p3s2.length; i++) {
+            redacted += "<li>" + escapeHtml(p3s2[i]) + "</li>"
+        }
+        redacted += "</ul>"
+
+        if (draftPlanStructure.partThree.subparts === '3') {
+            redacted += "<h5><i>&emsp;3. " + escapeHtml(draftPlanStructure.partThree.subpartThreeTitle) + "</i></h5>";
+            redacted += "<ul>"
+            for (var i = 0; i < p3s3.length; i++) {
+                redacted += "<li>" + escapeHtml(p3s3[i]) + "</li>"
+            }
+            redacted += "</ul>"
+        }
+    }
+
+    redacted += "<br/><br/>";
+    redacted += "<h3>Brouillon: Annonce de plan</h3><br/>";
+    redacted += escapeHtml(result.draftAnnounce);
+
+    return redacted;
+}
+
 const buildFinalRedaction = function(id: number) {
     let redacted = "";
     let draftPlanStructure: any = {};
@@ -320,4 +482,5 @@ export {    getProjectFromId,
             getConclusionRedacted,
             saveEverythingRedacted,
             getEverythingRedacted,
-            buildFinalRedaction }
+            buildFinalRedaction,
+            buildDraftRecap }
