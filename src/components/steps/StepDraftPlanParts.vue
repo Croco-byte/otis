@@ -12,7 +12,7 @@
         </div>
         <br/>
         <br/>
-        <h5>Tu peux maintenant, ci-dessous, organiser les éléments que tu avais repérés à l'étape précédente dans tes parties, auxquelles tu peux donner un titre. Utilise la souris pour déplacer les éléments dans les différentes colonnes.</h5>
+        <h5>Tu peux maintenant, ci-dessous, organiser les éléments que tu avais repérés à l'étape précédente dans tes parties. Utilise la souris pour déplacer les éléments dans les différentes colonnes.</h5>
         <h5>N'oublie pas également de donner un titre à tes parties dans les encadrés du tableau ci-dessous !</h5>
         <br/>
         <div class="d-flex flex-column border">

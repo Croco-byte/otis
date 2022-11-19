@@ -5,7 +5,7 @@
       <h1 class="mb-3">Récapitulatif brouillon</h1>
     </div>
     <!-- Header -->
-    <div class="w-50 align-self-center"><img  src="../../assets/onizuka_draft_recap.jpg" class="img-fluid"/></div>
+    <div class="w-50 align-self-center"><img  src="../../assets/otis_recap.gif" class="img-fluid"/></div>
     <h5>Bien joué, tu as terminé ton brouillon et tu es maintenant prêt à passer à l'analyse du texte et à la rédaction.
         Si tu le souhaites, tu peux exporter l'ensemble de ton brouillon en cliquant sur le bouton "Générer PDF brouillon" ci-dessous (si tu veux le transmettre à ton professeur, ou avoir tous les éléments de ton brouillon sous les yeux pour les prochaines étapes).
     </h5>
@@ -47,7 +47,7 @@ export default defineComponent ({
 
         exportToPdf() {
             html2pdf(this.draftRedacted, {
-                margin: 15, filename: "brouillon.pdf",
+                margin: 15, filename: "brouillon.pdf", pagebreak: { mode: 'avoid-all'}
             });
         }
     },

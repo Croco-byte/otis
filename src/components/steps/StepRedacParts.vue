@@ -39,7 +39,6 @@
                 <MDBTabItem v-if="structure.parts === '3' && structure.partThree.subparts === '3'" tabId="p3s3" href="p3s3">III. Sous-partie 3</MDBTabItem>
                 <i v-if="structure.parts === '3' && structure.partThree.subparts === '3'" class="fas fa-arrow-alt-circle-right align-self-center"></i>
                 <MDBTabItem tabId="end" href="end">Fin rédaction parties <i class="fas fa-flag-checkered"></i></MDBTabItem>
-
         </MDBTabNav>
         
         <MDBTabContent>
@@ -48,9 +47,9 @@
                 <span><b>Annoncer la partie</b></span>
                 <br/><br/>
                 <div class="d-flex justify-content-end">
-                <MDBPopover v-model="popoverAnnounce" dismissible direction="top">
+                <MDBPopover v-model="popoverAnnounce1" dismissible direction="top">
                     <template #reference>
-                        <span class="float-end" v-on:click="popoverAnnounce = !popoverAnnounce"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                        <span class="float-end" v-on:click="popoverAnnounce1 = !popoverAnnounce1"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                     </template>
                     <template #header>Annoncer ses parties</template>
                     <template #body>Fais une phrase pour annoncer de quoi va parler ta première partie (essaie de ne pas formuler exactement comme dans le plan pour ne pas te répéter). Pense à commencer par un connecteur logique du type "tout d'abord", "premièrement", "dans un premier temps"...</template>
@@ -152,9 +151,9 @@
                 <span><b>Transition (partie 1 -> partie 2)</b></span>
                 <br/><br/>
                 <div class="d-flex justify-content-end">
-                <MDBPopover v-model="popoverTransition" dismissible direction="top">
+                <MDBPopover v-model="popoverTransition1" dismissible direction="top">
                     <template #reference>
-                        <span class="float-end" v-on:click="popoverTransition = !popoverTransition"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                        <span class="float-end" v-on:click="popoverTransition1 = !popoverTransition1"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                     </template>
                     <template #header>Rédiger une transition</template>
                     <template #body>Une transition se déroule en deux temps : d'abord, résume en une phrase ou deux ce que tu as démontré dans la partie qui vient de se terminer. Ensuite, également en une phrase ou deux, essaie de faire un lien avec la partie suivante.</template>
@@ -169,12 +168,12 @@
                 <span><b>Annoncer la partie</b></span>
                 <br/><br/>
                 <div class="d-flex justify-content-end">
-                <MDBPopover v-model="popoverAnnounce" dismissible direction="top">
+                <MDBPopover v-model="popoverAnnounce2" dismissible direction="top">
                     <template #reference>
-                        <span class="float-end" v-on:click="popoverAnnounce = !popoverAnnounce"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                        <span class="float-end" v-on:click="popoverAnnounce2 = !popoverAnnounce2"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                     </template>
                     <template #header>Annoncer ses parties</template>
-                    <template #body>Fais une phrase pour annoncer de quoi va parler ta première partie (essaie de ne pas formuler exactement comme dans le plan pour ne pas te répéter). Pense à commencer par un connecteur logique du type "tout d'abord", "premièrement", "dans un premier temps"...</template>
+                    <template #body>Fais une phrase pour annoncer de quoi va parler ta seconde partie (essaie de ne pas formuler exactement comme dans le plan pour ne pas te répéter). Pense à commencer par un connecteur logique du type "tout d'abord", "premièrement", "dans un premier temps"...</template>
                 </MDBPopover>
                 </div>
                 <MDBTextarea rows="5" label="Annonce de la seconde partie" v-model="p2A" wrapperClass="mb-4"/>
@@ -273,9 +272,9 @@
                 <span><b>Transition (partie 2 -> partie 3)</b></span>
                 <br/><br/>
                 <div class="d-flex justify-content-end">
-                <MDBPopover v-model="popoverTransition" dismissible direction="top">
+                <MDBPopover v-model="popoverTransition2" dismissible direction="top">
                     <template #reference>
-                        <span class="float-end" v-on:click="popoverTransition = !popoverTransition"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                        <span class="float-end" v-on:click="popoverTransition2 = !popoverTransition2"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                     </template>
                     <template #header>Rédiger une transition</template>
                     <template #body>Une transition se déroule en deux temps : d'abord, résume en une phrase ou deux ce que tu as démontré dans la partie qui vient de se terminer. Ensuite, également en une phrase ou deux, essaie de faire un lien avec la partie suivante.</template>
@@ -290,12 +289,12 @@
                 <span><b>Annoncer la partie</b></span>
                 <br/><br/>
                 <div class="d-flex justify-content-end">
-                <MDBPopover v-model="popoverAnnounce" dismissible direction="top">
+                <MDBPopover v-model="popoverAnnounce3" dismissible direction="top">
                     <template #reference>
-                        <span class="float-end" v-on:click="popoverAnnounce = !popoverAnnounce"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
+                        <span class="float-end" v-on:click="popoverAnnounce3 = !popoverAnnounce3"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                     </template>
                     <template #header>Annoncer ses parties</template>
-                    <template #body>Fais une phrase pour annoncer de quoi va parler ta première partie (essaie de ne pas formuler exactement comme dans le plan pour ne pas te répéter). Pense à commencer par un connecteur logique du type "tout d'abord", "premièrement", "dans un premier temps"...</template>
+                    <template #body>Fais une phrase pour annoncer de quoi va parler ta troisième partie (essaie de ne pas formuler exactement comme dans le plan pour ne pas te répéter). Pense à commencer par un connecteur logique du type "tout d'abord", "premièrement", "dans un premier temps"...</template>
                 </MDBPopover>
                 </div>
                 <MDBTextarea rows="5" label="Annonce de la troisième partie" v-model="p3A" wrapperClass="mb-4"/>
@@ -437,12 +436,19 @@ export default defineComponent ({
 
     setup() {
         const activeTabId1 = ref('p1A');
-        const popoverAnnounce = ref(false);
-        const popoverTransition = ref(false);
+        const popoverAnnounce1 = ref(false);
+        const popoverAnnounce2 = ref(false);
+        const popoverAnnounce3 = ref(false);
+        const popoverTransition1 = ref(false);
+        const popoverTransition2 = ref(false);
 
         return { activeTabId1,
-                 popoverAnnounce,
-                 popoverTransition }
+                 popoverAnnounce1,
+                 popoverAnnounce2,
+                 popoverAnnounce3,
+                 popoverTransition1,
+                 popoverTransition2
+                }
     },
 
     data(): any {

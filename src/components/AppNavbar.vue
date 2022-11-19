@@ -3,7 +3,7 @@
     <!-- Navbar -->
     <MDBNavbar expand="lg" light bg="white" container>
       <MDBNavbarBrand href="#">
-          <img src="../assets/logo.png" height="60" alt="logo" loading="lazy"/>
+          <img src="../assets/otis_logo.png" height="60" alt="logo" loading="lazy"/>
       </MDBNavbarBrand>
       <MDBNavbarToggler target="#navbarExample01"></MDBNavbarToggler>
       <MDBNavbarNav collapse="navbarExample01" class="mb-2 mb-lg-0">

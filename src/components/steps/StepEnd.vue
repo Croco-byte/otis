@@ -5,7 +5,7 @@
       <h1 class="mb-3">Arrivée !</h1>
     </div>
     <!-- Header -->
-    <div class="w-50 align-self-center"><img  src="../../assets/onizuka_finish.jpg" class="img-fluid"/></div>
+    <div class="w-50 align-self-center"><img  src="../../assets/otis_end.gif" class="img-fluid"/></div>
     <h5>Bravo, tu as terminé ton commentaire de texte ! Tu peux maintenant l'exporter au format PDF en cliquant sur "Générer PDF" ci-dessous.
         Si tu préfères, tu peux copier ton commentaire depuis l'étape précédente et le coller dans un éditeur de texte.</h5>
 

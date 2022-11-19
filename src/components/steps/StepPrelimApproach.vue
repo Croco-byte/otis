@@ -5,7 +5,6 @@
       <h1 class="mb-3">Aborder le texte</h1>
     </div>
     <!-- Header -->
-    <div class="w-50 align-self-center"><img  src="../../assets/onizuka_reading.jpg" class="img-fluid"/></div>
     <div class="w-75 text-start align-self-center">
         <br/><h5>Avant toute chose, commence par lire le texte attentivement !</h5>
         <p>Quelques conseils de lecture :</p>

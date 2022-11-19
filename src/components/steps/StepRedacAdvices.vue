@@ -5,7 +5,6 @@
       <h1 class="mb-3">Rédaction: quelques conseils ...</h1>
     </div>
     <!-- Header -->
-    <div class="w-50 align-self-center"><img  src="../../assets/onizuka_writing.jpg" class="img-fluid"/></div>
     <div class="w-75 text-start align-self-center">
         <br/><h5>Il est maintenant temps de commencer à rédiger le commentaire de texte. Si tu as bien rassemblé tous les éléments au cours des étapes précédentes, il s'agit de la partie la plus facile ! Quelques conseils à garder en tête :</h5>
         <MDBListGroup light numbered style="min-width: 22rem">

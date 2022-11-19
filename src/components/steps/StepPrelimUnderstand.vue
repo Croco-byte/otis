@@ -5,7 +5,6 @@
       <h1 class="mb-3">Comprendre le texte</h1>
     </div>
     <!-- Header -->
-    <div class="w-50 align-self-center"><img  src="../../assets/onizuka_thinking.jpg" class="img-fluid"/></div>
     <div class="w-75 text-start align-self-center">
         <br/><h5>Maintenant que tu as lu le texte, essaie d'en comprendre le sens général !</h5>
         <p>Quelques conseils pour une meilleure compréhension :</p>

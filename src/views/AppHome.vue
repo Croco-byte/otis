@@ -1,46 +1,35 @@
 <template>
-<div style="height: 80vh">
+
     <!-- Header -->
     <div class="p-5 text-center bg-light">
-      <h1 class="mb-3">Great Helper Onizuka</h1>
+      <h1 class="mb-3">OTIS</h1>
       <h4 class="mb-3">Commentaires de texte guidés</h4>
     </div>
     <!-- Header -->
     
     <div class="d-flex justify-content-center" style="width: 70%; margin: auto;">
-        <div><img  src="../assets/onizuka.jpg"/></div>
+        <div class="align-self-center me-3"><img width="500" height="350" src="../assets/otis.gif"/></div>
         <div>
-            <div style="text-align: left; padding-left: 25px;">
-            <p>Salut les nazes. Ceci est une application pour vous aider à faire des commentaires de texte. Great Helper Onizuka va vous accompagner pas-à-pas pour que vous pondiez enfin un devoir à peu près potable. Et éviter à Solène de tomber définitivement dans la dépression à force de vous filer des notes de merde.</p>
-            <p>PS: Si Onizuka ça vous dit rien et que vous avez pas la ref du titre de l'appli, allez lire GTO, bande d'incultes.</p>
-            <p> Le fonctionnement de l'application est assez simple : vous pouvez commencer un nouveau commentaire, ou en poursuivre un que vous avez déjà commencé. Si tout ça n'est pas clair, cliquez sur le bouton ci-dessous pour accéder au tutoriel de l'application.</p>
+            <div style="text-align: left; margin-left: 25px;">
+            <h5 class="text-center"><q>Mais vous savez, moi je ne crois pas qu'il y ait de bonne ou de mauvaise situation... Par contre, il peut y avoir de bons ou mauvais commentaires de texte.</q></h5>
+            <p class="text-center"><i>Otis, Asterix & Cléopatre (s'il avait été prof de français)</i></p>
+                <p>L'objectif de cette application est de vous guider pas à pas dans l'application de la méthode qui vous permettra de rédiger facilement de bons commentaires de texte, structurés et clairs.</p>
+            <p>Le fonctionnement de l'application est simple : vous pouvez commencer un nouveau commentaire de texte en cliquant sur le bouton "Nouveau projet" dans le menu ci-dessus. Donnez un titre et une description à votre commentaire, puis laissez-vous guider par l'application pour le rédiger. Vous aurez la possibilité de sauvegarder votre travail, puis de le retrouver en cliquant sur l'onglet "Mes Projets" dans le menu.</p>
+            <p class="text-center"> 📜📜📜📜📜 </p>
             </div>
-            <MDBBtn color='danger' style="text-align: centered;" v-on:click="saveNewProject()">Tutoriel</MDBBtn>
         </div>
     </div>
-</div>
+<br/><br/><br/>
 </template>
 
 <script lang="ts">
   import { defineComponent } from '@vue/runtime-core';
-import { MDBBtn } from 'mdb-vue-ui-kit';
 
   export default defineComponent ({
     components: {
-        MDBBtn
     },
 
     methods: {
-        saveNewProject: async function() {
-            const result: any = await window.electronAPI.registerProject({projectName: "test", projectDescription: "test"});
-            if (result.success) {
-                console.log("Successfully registered project");
-                this.$router.push({path: '/project/' + result.projectId});
-            }
-            else {
-                console.log("Error registering project");
-            }
-        }
     },
 
     async mounted(): Promise<void> {

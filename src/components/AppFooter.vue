@@ -16,7 +16,7 @@
         </MDBCol>
 
         <MDBCol>
-                Fuck copyrights <i class="fas fa-smile"></i>  : this software is open-source 
+                No copyrights <i class="fas fa-smile"></i>  : this software is open-source 
         </MDBCol>
         <!--Grid column-->
       </MDBRow>
