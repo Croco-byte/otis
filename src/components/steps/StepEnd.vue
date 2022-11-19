@@ -46,7 +46,7 @@ export default defineComponent ({
 
         exportToPdf() {
             html2pdf(this.everythingRedacted, {
-                margin: 15, filename: "commentaire_de_texte.pdf",
+                margin: 15, filename: "commentaire_de_texte.pdf", pagebreak: { mode: 'avoid-all'}
             });
         }
     },

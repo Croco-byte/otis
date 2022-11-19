@@ -406,43 +406,43 @@ const buildFinalRedaction = function(id: number) {
     redacted += '<h3 style="text-align: center;">' + escapeHtml(result.projectDate) + "</h3></div>";
     redacted += "<br/><br/>";
     redacted += "&emsp;" + escapeHtml(result.introRedacted) + "<br/><br/>";
-    redacted += "<h3>&emsp;<b><u>I. " + escapeHtml(draftPlanStructure.partOne.title) + "</b></u></h3>";
-    redacted += "<p>" + escapeHtml(result.p1Announce) + "</p><br/>";
-    redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partOne.subpartOneTitle) + "</i></h4>";
-    redacted += "<p>" + escapeHtml(result.p1s1Redacted) + "</p><br/>";
-    redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partOne.subpartTwoTitle) + "</i></h4>";
-    redacted += "<p>" + escapeHtml(result.p1s2Redacted) + "</p><br/>";
+    //redacted += "<h3>&emsp;<b><u>I. " + escapeHtml(draftPlanStructure.partOne.title) + "</b></u></h3>";
+    redacted += "<p>&emsp;" + escapeHtml(result.p1Announce) + "</p><br/>";
+    //redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partOne.subpartOneTitle) + "</i></h4>";
+    redacted += "<p>&emsp;" + escapeHtml(result.p1s1Redacted) + "</p><br/>";
+    //redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partOne.subpartTwoTitle) + "</i></h4>";
+    redacted += "<p>&emsp;" + escapeHtml(result.p1s2Redacted) + "</p><br/>";
 
     if (draftPlanStructure.partOne.subparts === '3') {
-        redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partOne.subpartThreeTitle) + "</i></h4>";
-        redacted += "<p>" + escapeHtml(result.p1s3Redacted) + "</p><br/>";
+        //redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partOne.subpartThreeTitle) + "</i></h4>";
+        redacted += "<p>&emsp;" + escapeHtml(result.p1s3Redacted) + "</p><br/>";
     }
 
-    redacted += "<br/><p>" + escapeHtml(result.p1Transition) + "</p><br/>";
-    redacted += "<h3>&emsp;<b><u>II. " + escapeHtml(draftPlanStructure.partTwo.title) + "</b></u></h3>";
-    redacted += "<p>" + escapeHtml(result.p2Announce) + "</p><br/>";
-    redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partTwo.subpartOneTitle) + "</i></h4>";
-    redacted += "<p>" + escapeHtml(result.p2s1Redacted) + "</p><br/>";
-    redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partTwo.subpartTwoTitle) + "</i></h4>";
-    redacted += "<p>" + escapeHtml(result.p2s2Redacted) + "</p><br/>";
+    redacted += "<br/><p>&emsp;" + escapeHtml(result.p1Transition) + "</p><br/>";
+    //redacted += "<h3>&emsp;<b><u>II. " + escapeHtml(draftPlanStructure.partTwo.title) + "</b></u></h3>";
+    redacted += "<p>&emsp;" + escapeHtml(result.p2Announce) + "</p><br/>";
+    //redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partTwo.subpartOneTitle) + "</i></h4>";
+    redacted += "<p>&emsp;" + escapeHtml(result.p2s1Redacted) + "</p><br/>";
+    //redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partTwo.subpartTwoTitle) + "</i></h4>";
+    redacted += "<p>&emsp;" + escapeHtml(result.p2s2Redacted) + "</p><br/>";
 
     if (draftPlanStructure.partTwo.subparts === '3') {
-        redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partTwo.subpartThreeTitle) + "</i></h4>";
-        redacted += "<p>" + escapeHtml(result.p2s3Redacted) + "</p><br/>";
+        //redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partTwo.subpartThreeTitle) + "</i></h4>";
+        redacted += "<p>&emsp;" + escapeHtml(result.p2s3Redacted) + "</p><br/>";
     }
 
     if (draftPlanStructure.parts === '3') {
-        redacted += "<br/><p>" + escapeHtml(result.p2Transition) + "</p><br/>";
-        redacted += "<h3>&emsp;<b><u>III. " + escapeHtml(draftPlanStructure.partThree.title) + "</u></b></h3>";
-        redacted += "<p>" + escapeHtml(result.p3Announce) + "</p><br/>";
-        redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partThree.subpartOneTitle) + "</i></h4>";
-        redacted += "<p>" + escapeHtml(result.p3s1Redacted) + "</p><br/>";
-        redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partThree.subpartTwoTitle) + "</i></h4>";
-        redacted += "<p>" + escapeHtml(result.p3s2Redacted) + "</p><br/>";
+        redacted += "<br/><p>&emsp;" + escapeHtml(result.p2Transition) + "</p><br/>";
+        //redacted += "<h3>&emsp;<b><u>III. " + escapeHtml(draftPlanStructure.partThree.title) + "</u></b></h3>";
+        redacted += "<p>&emsp;" + escapeHtml(result.p3Announce) + "</p><br/>";
+        //redacted += "<h4><i>&emsp;1. " + escapeHtml(draftPlanStructure.partThree.subpartOneTitle) + "</i></h4>";
+        redacted += "<p>&emsp;" + escapeHtml(result.p3s1Redacted) + "</p><br/>";
+        //redacted += "<h4><i>&emsp;2. " + escapeHtml(draftPlanStructure.partThree.subpartTwoTitle) + "</i></h4>";
+        redacted += "<p>&emsp;" + escapeHtml(result.p3s2Redacted) + "</p><br/>";
 
         if (draftPlanStructure.partThree.subparts === '3') {
-            redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partThree.subpartThreeTitle) + "</i></h4>";
-            redacted += "<p>" + escapeHtml(result.p3s3Redacted) + "</p><br/>";
+        //    redacted += "<h4><i>&emsp;3. " + escapeHtml(draftPlanStructure.partThree.subpartThreeTitle) + "</i></h4>";
+            redacted += "<p>&emsp;" + escapeHtml(result.p3s3Redacted) + "</p><br/>";
         }
     }
 

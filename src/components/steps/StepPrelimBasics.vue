@@ -29,7 +29,7 @@
                     <span class="float-end" v-on:click="popoverGenre = !popoverGenre"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                 </template>
                 <template #header>Le genre du texte</template>
-                <template #body>Par exemple s'agit-il de poésie ? De théâtre ? D'un roman ? De littérature d'idée ?</template>
+                <template #body>S'agit-il de poésie ? De théâtre ? D'un roman ? De littérature d'idée ?</template>
             </MDBPopover>
         </div>
         <MDBInput type="text" v-model="genre" wrapperClass="mb-4"/>
@@ -41,7 +41,12 @@
                     <span class="float-end" v-on:click="popoverType = !popoverType"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                 </template>
                 <template #header>Le type du texte</template>
-                <template #body>[demander à Solène]</template>
+                <template #body>Indique ici à quel type de passage tu as affaire pour le genre du texte. Voici quelques exemples de types de texte pour les différents genres :
+                    <br/>> Roman :  portrait d'un personnage, description, dialogue, scène d'action, incipit (début d'un roman), excipit (fin du roman)...
+                    <br/>> Théâtre : comédie, tragédie ou autre (puis, pour le type en question, scène d'exposition, monologue, tirade, dialogue, scène de résolution...).
+                    <br/>> Poème : vers réguliers ou libre (c'est-à-dire avec toujours le même nombre de syllabes ou non, avec des rimes ou non), prose, forme particulière (surtout si c'est un sonnet).
+                    <br/>> Littérature d'idées : discours, essai, pamphlet (texte qui dénonce violemment et se moque)...
+                </template>
             </MDBPopover>
         </div>
         <MDBInput type="text" v-model="type" wrapperClass="mb-4"/>
@@ -53,7 +58,7 @@
                     <span class="float-end" v-on:click="popoverGoal = !popoverGoal"><i>Clique ici pour obtenir de l'aide </i><i class="fas fa-question-circle"></i></span>
                 </template>
                 <template #header>Le but du texte</template>
-                <template #body>[demander à Solène]</template>
+                <template #body>Indique ici la vision que l'auteur essaie de nous faire passer dans son texte. Cela dépendra du genre ainsi que du type du texte, mais par exemple cherche-t-il à nous donner une image positive/négative d'un personnage ? Cherche-t-il à nous faire rire ? Veut-il dénoncer quelque chose ?</template>
             </MDBPopover>
         </div>
         <MDBInput type="text" v-model="goal" wrapperClass="mb-4"/>
